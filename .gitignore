@@ -11,3 +11,5 @@ venv
 .env
 
 **/*.sqlite3
+
+**/*.png
