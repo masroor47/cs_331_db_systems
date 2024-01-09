@@ -68,10 +68,20 @@ def run_query(query_text,
     conn.commit()
     log_query(query_text, query_desc, query_db, len(rows), "masroor", query_src, duration)
     conn.close()
-    if query_text.upper().startswith("SELECT"):
+    query_upper = query_text.upper()
+    if query_upper.startswith("SELECT") or \
+        query_upper.startswith("(SELECT") or \
+        query_upper.startswith("SHOW") or \
+        query_upper.startswith("DESC"):
+        
         headers = [desc[0] for desc in cursor.description]
-        data = [[str(col) for col in row] for row in rows]
+        if len(rows) == 0:
+            data = [[None for _ in headers]]
+        else:
+            data = [[str(col) for col in row] for row in rows]
         return headers, data
+    else:
+        return [], []
 
 
 def print_table(title, headers, data, alignments=None):
@@ -127,13 +137,12 @@ def create_graduates():
         run_query(insert_query, "inserting into graduate", "udb", assignment, graduate)
 
 
+load_dotenv()
+user = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+
 if __name__ == "__main__":
     assignment = "Assignment 3"
-
-    load_dotenv()
-    user = os.environ.get("USERNAME")
-    password = os.environ.get("PASSWORD")
-
     conn = create_connection(None)
 
     create_graduates()
