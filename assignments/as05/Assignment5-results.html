@@ -1,0 +1,524 @@
+<html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as05">
+<style>body {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    color: purple;
+    text-align: center;
+}
+h3 {
+    color: purple;
+}
+.vericaltext {
+ writing-mode: vertical-lr;
+ text-orientation: upright;
+}
+
+table, th, td {
+    border: 1px solid;
+    text-align: center;
+    vertical-align: top
+}
+th > a {
+    color: lavender;
+}
+th {
+    background-color: purple;
+    color: lavender;
+}
+tr:nth-child(even) {
+    background-color: lavender;
+}
+tr:nth-child(odd) {
+    background-color: plum;
+}</style>
+<script>
+function sortTable(tableId, colNum, colType) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+  table = document.getElementById(tableId);
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[colNum];
+      y = rows[i + 1].getElementsByTagName("td")[colNum];
+      if (colType == 'N') { 
+        if (((dir == "asc") && (Number(x.innerHTML) > Number(y.innerHTML))) ||
+            ((dir == "desc") && (Number(x.innerHTML) < Number(y.innerHTML)))) {
+          shouldSwitch = true;
+          break;
+        }
+      } else {
+        if (((dir == "asc") && (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())) ||
+            ((dir == "desc") && (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()))) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchCount ++;
+    } else {
+     if (switchCount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</head>
+<body><h1>TBA</h1>
+<h3>Table of Contents</h3>
+<ol><li><a href="#table-Select-everything-from-the-new-view-v_udb_table_columns">Select everything from the new view v_udb_table_columns</a>
+</li>
+<li><a href="#table-Aggregation:-retrieve-number-of-columns-per-table">Aggregation: retrieve number of columns per table</a>
+</li>
+</ol>
+<h3>Select everything from the new view v_udb_table_columns</h3>
+<table id="table-Select-everything-from-the-new-view-v_udb_table_columns" style="width:100%"><th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 0, 'S')"">TABLE_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 1, 'N')"">ORDINAL_POSITION</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 2, 'S')"">COLUMN_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 3, 'S')"">DATA_TYPE</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 4, 'N')"">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 5, 'S')"">IS_NULLABLE</a>
+</th>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">s_ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">i_ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">room_number</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">capacity</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">title</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">50</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">credits</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">budget</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">graduate_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">graduate_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">30</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">salary</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">prereq_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">room_number</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">time_slot_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">tot_cred</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">time_slot_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">day</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">start_hr</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">start_min</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">end_hr</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">end_min</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">TABLE_NAME</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">64</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">ORDINAL_POSITION</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">COLUMN_NAME</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">64</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">DATA_TYPE</td>
+<td style="text-align:left;">longtext</td>
+<td style="text-align:right;">4294967295</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">IS_NULLABLE</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">NO</td>
+</tr>
+</table>
+<h3>Aggregation: retrieve number of columns per table</h3>
+<table id="table-Aggregation:-retrieve-number-of-columns-per-table" style="width:100%"><th><a href="javascript:sortTable('table-Aggregation:-retrieve-number-of-columns-per-table', 0, 'S')"">TABLE_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Aggregation:-retrieve-number-of-columns-per-table', 1, 'N')"">columns</a>
+</th>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">3</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">3</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">7</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">6</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">5</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">6</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">6</td>
+</tr>
+</table>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 08, 2024 10:51 AM</h6>
+</center>
+</body>
+</html>
