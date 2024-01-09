@@ -1,0 +1,484 @@
+<html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as04">
+<style>body {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    color: purple;
+    text-align: center;
+}
+h3 {
+    color: purple;
+}
+.vericaltext {
+ writing-mode: vertical-lr;
+ text-orientation: upright;
+}
+
+table, th, td {
+    border: 1px solid;
+    text-align: center;
+    vertical-align: top
+}
+th > a {
+    color: lavender;
+}
+th {
+    background-color: purple;
+    color: lavender;
+}
+tr:nth-child(even) {
+    background-color: lavender;
+}
+tr:nth-child(odd) {
+    background-color: plum;
+}</style>
+<script>
+function sortTable(tableId, colNum, colType) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+  table = document.getElementById(tableId);
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[colNum];
+      y = rows[i + 1].getElementsByTagName("td")[colNum];
+      if (colType == 'N') { 
+        if (((dir == "asc") && (Number(x.innerHTML) > Number(y.innerHTML))) ||
+            ((dir == "desc") && (Number(x.innerHTML) < Number(y.innerHTML)))) {
+          shouldSwitch = true;
+          break;
+        }
+      } else {
+        if (((dir == "asc") && (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())) ||
+            ((dir == "desc") && (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()))) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchCount ++;
+    } else {
+     if (switchCount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</head>
+<body><h1>TBA</h1>
+<h3>Table of Contents</h3>
+<ol><li><a href="#table-chapter-3,-slide-17:-List-all-Comp-Sci-instructors">chapter 3, slide 17: List all Comp Sci instructors</a>
+</li>
+<li><a href="#table-chapter-3,-slide-17:-List-all-the-good-Comp-Sci-instructors">chapter 3, slide 17: List all the good Comp Sci instructors</a>
+</li>
+<li><a href="#table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-who-have-taught-some-course-AND-the-course_id">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</a>
+</li>
+<li><a href="#table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-in-the-Art-department-who-have-taught-some-course-AND-the-course_id">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</a>
+</li>
+<li><a href="#table-chapter-3,-slide-25:-Find-the-names-of-all-instructors-with-salary-between-$90,000-AND-$100,000">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</a>
+</li>
+<li><a href="#table-chapter-3,-slide-26:-Find-courses-that-ran-in-Fall-2017-or-in-Spring-2018">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</a>
+</li>
+<li><a href="#table-chapter-3,-slide-31:-Find-the-average-salary-of-instructors-in-the-Computer-Science-department">chapter 3, slide 31: Find the average salary of instructors in the Computer Science department</a>
+</li>
+<li><a href="#table-chapter-3,-slide-52:-List-all-departments-along-with-the-number-of-instructors-in-each-department">chapter 3, slide 52: List all departments along with the number of instructors in each department</a>
+</li>
+<li><a href="#table-chapter-3,-slide-32:-Find-the-average-salary-of-instructors-in-each-department">chapter 3, slide 32: Find the average salary of instructors in each department</a>
+</li>
+<li><a href="#table-chapter-3,-slide-34:-Find-the-names-AND-average-salaries-of-all-departments-whose-average-salary-is-greater-than-42000">chapter 3, slide 34: Find the names AND average salaries of all departments whose average salary is greater than 42000</a>
+</li>
+<li><a href="#table-Homework-query-#1:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-THAT-order-in-their-names">Homework query #1: Retrieve all courses that have the letters a, e, i in THAT order in their names</a>
+</li>
+<li><a href="#table-Homework-query-#2:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-ANY-order-in-their-names">Homework query #2: Retrieve all courses that have the letters a, e, i in ANY order in their names</a>
+</li>
+<li><a href="#table-Homework-query-#3:-Retrieve-the-names-of-all-students-who-failed-a-course-(grade-of-F)-along-with-the-name-of-the-course-that-they-failed.">Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed.</a>
+</li>
+<li><a href="#table-Homework-query-#4:-Retrieve-the-percentage-of-solid-A-grades-compared-to-all-courses,-AND-rename-that-column-"Percent_A"">Homework query #4: Retrieve the percentage of solid A grades compared to all courses, AND rename that column "Percent_A"</a>
+</li>
+<li><a href="#table-Homework-query-#5:-Retrieve-the-names-AND-numbers-of-all-courses-that-do-not-have-prerequisites.">Homework query #5: Retrieve the names AND numbers of all courses that do not have prerequisites.</a>
+</li>
+<li><a href="#table-Homework-query-#6:-Retrieves-the-names-of-all-students-AND-their-advisors-if-they-have-one.">Homework query #6: Retrieves the names of all students AND their advisors if they have one.</a>
+</li>
+</ol>
+<h3>chapter 3, slide 17: List all Comp Sci instructors</h3>
+<table id="table-chapter-3,-slide-17:-List-all-Comp-Sci-instructors" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-17:-List-all-Comp-Sci-instructors', 0, 'S')"">name</a>
+</th>
+<tr><td style="text-align:left;">Srinivasan</td>
+</tr>
+<tr><td style="text-align:left;">Katz</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+</tr>
+</table>
+<h3>chapter 3, slide 17: List all the good Comp Sci instructors</h3>
+<table id="table-chapter-3,-slide-17:-List-all-the-good-Comp-Sci-instructors" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-17:-List-all-the-good-Comp-Sci-instructors', 0, 'S')"">name</a>
+</th>
+<tr><td style="text-align:left;">Katz</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+</tr>
+</table>
+<h3>chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</h3>
+<table id="table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-who-have-taught-some-course-AND-the-course_id" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-who-have-taught-some-course-AND-the-course_id', 0, 'S')"">name</a>
+</th>
+<th><a href="javascript:sortTable('table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-who-have-taught-some-course-AND-the-course_id', 1, 'S')"">course_id</a>
+</th>
+<tr><td style="text-align:left;">Crick</td>
+<td style="text-align:left;">BIO-101</td>
+</tr>
+<tr><td style="text-align:left;">Crick</td>
+<td style="text-align:left;">BIO-301</td>
+</tr>
+<tr><td style="text-align:left;">Srinivasan</td>
+<td style="text-align:left;">CS-101</td>
+</tr>
+<tr><td style="text-align:left;">Katz</td>
+<td style="text-align:left;">CS-101</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+<td style="text-align:left;">CS-190</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+<td style="text-align:left;">CS-190</td>
+</tr>
+<tr><td style="text-align:left;">Srinivasan</td>
+<td style="text-align:left;">CS-315</td>
+</tr>
+<tr><td style="text-align:left;">Katz</td>
+<td style="text-align:left;">CS-319</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+<td style="text-align:left;">CS-319</td>
+</tr>
+<tr><td style="text-align:left;">Srinivasan</td>
+<td style="text-align:left;">CS-347</td>
+</tr>
+<tr><td style="text-align:left;">Kim</td>
+<td style="text-align:left;">EE-181</td>
+</tr>
+<tr><td style="text-align:left;">Wu</td>
+<td style="text-align:left;">FIN-201</td>
+</tr>
+<tr><td style="text-align:left;">El Said</td>
+<td style="text-align:left;">HIS-351</td>
+</tr>
+<tr><td style="text-align:left;">Mozart</td>
+<td style="text-align:left;">MU-199</td>
+</tr>
+<tr><td style="text-align:left;">Einstein</td>
+<td style="text-align:left;">PHY-101</td>
+</tr>
+</table>
+<h3>chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</h3>
+<table id="table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-in-the-Art-department-who-have-taught-some-course-AND-the-course_id" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-in-the-Art-department-who-have-taught-some-course-AND-the-course_id', 0, 'S')"">name</a>
+</th>
+<th><a href="javascript:sortTable('table-chapter-3,-slide-19:-Find-the-names-of-all-instructors-in-the-Art-department-who-have-taught-some-course-AND-the-course_id', 1, 'S')"">course_id</a>
+</th>
+<tr><td style="text-align:left;"></td>
+<td style="text-align:left;"></td>
+</tr>
+</table>
+<h3>chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</h3>
+<table id="table-chapter-3,-slide-25:-Find-the-names-of-all-instructors-with-salary-between-$90,000-AND-$100,000" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-25:-Find-the-names-of-all-instructors-with-salary-between-$90,000-AND-$100,000', 0, 'S')"">name</a>
+</th>
+<tr><td style="text-align:left;">Wu</td>
+</tr>
+<tr><td style="text-align:left;">Einstein</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+</tr>
+</table>
+<h3>chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</h3>
+<table id="table-chapter-3,-slide-26:-Find-courses-that-ran-in-Fall-2017-or-in-Spring-2018" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-26:-Find-courses-that-ran-in-Fall-2017-or-in-Spring-2018', 0, 'S')"">course_id</a>
+</th>
+<tr><td style="text-align:left;">CS-101</td>
+</tr>
+<tr><td style="text-align:left;">CS-347</td>
+</tr>
+<tr><td style="text-align:left;">PHY-101</td>
+</tr>
+<tr><td style="text-align:left;">FIN-201</td>
+</tr>
+<tr><td style="text-align:left;">MU-199</td>
+</tr>
+<tr><td style="text-align:left;">HIS-351</td>
+</tr>
+<tr><td style="text-align:left;">CS-319</td>
+</tr>
+<tr><td style="text-align:left;">CS-315</td>
+</tr>
+</table>
+<h3>chapter 3, slide 31: Find the average salary of instructors in the Computer Science department</h3>
+<table id="table-chapter-3,-slide-31:-Find-the-average-salary-of-instructors-in-the-Computer-Science-department" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-31:-Find-the-average-salary-of-instructors-in-the-Computer-Science-department', 0, 'S')"">avg(salary)</a>
+</th>
+<tr><td style="text-align:left;">77333.333333</td>
+</tr>
+</table>
+<h3>chapter 3, slide 52: List all departments along with the number of instructors in each department</h3>
+<table id="table-chapter-3,-slide-52:-List-all-departments-along-with-the-number-of-instructors-in-each-department" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-52:-List-all-departments-along-with-the-number-of-instructors-in-each-department', 0, 'S')"">dept_name</a>
+</th>
+<th><a href="javascript:sortTable('table-chapter-3,-slide-52:-List-all-departments-along-with-the-number-of-instructors-in-each-department', 1, 'S')"">num_instructors</a>
+</th>
+<tr><td style="text-align:left;">Biology</td>
+<td style="text-align:left;">1</td>
+</tr>
+<tr><td style="text-align:left;">Comp. Sci.</td>
+<td style="text-align:left;">3</td>
+</tr>
+<tr><td style="text-align:left;">Elec. Eng.</td>
+<td style="text-align:left;">1</td>
+</tr>
+<tr><td style="text-align:left;">Finance</td>
+<td style="text-align:left;">2</td>
+</tr>
+<tr><td style="text-align:left;">History</td>
+<td style="text-align:left;">2</td>
+</tr>
+<tr><td style="text-align:left;">Music</td>
+<td style="text-align:left;">1</td>
+</tr>
+<tr><td style="text-align:left;">Physics</td>
+<td style="text-align:left;">2</td>
+</tr>
+</table>
+<h3>chapter 3, slide 32: Find the average salary of instructors in each department</h3>
+<table id="table-chapter-3,-slide-32:-Find-the-average-salary-of-instructors-in-each-department" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-32:-Find-the-average-salary-of-instructors-in-each-department', 0, 'S')"">dept_name</a>
+</th>
+<th><a href="javascript:sortTable('table-chapter-3,-slide-32:-Find-the-average-salary-of-instructors-in-each-department', 1, 'S')"">avg_salary</a>
+</th>
+<tr><td style="text-align:left;">Biology</td>
+<td style="text-align:left;">72000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Comp. Sci.</td>
+<td style="text-align:left;">77333.333333</td>
+</tr>
+<tr><td style="text-align:left;">Elec. Eng.</td>
+<td style="text-align:left;">80000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Finance</td>
+<td style="text-align:left;">85000.000000</td>
+</tr>
+<tr><td style="text-align:left;">History</td>
+<td style="text-align:left;">61000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Music</td>
+<td style="text-align:left;">40000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Physics</td>
+<td style="text-align:left;">91000.000000</td>
+</tr>
+</table>
+<h3>chapter 3, slide 34: Find the names AND average salaries of all departments whose average salary is greater than 42000</h3>
+<table id="table-chapter-3,-slide-34:-Find-the-names-AND-average-salaries-of-all-departments-whose-average-salary-is-greater-than-42000" style="width:100%"><th><a href="javascript:sortTable('table-chapter-3,-slide-34:-Find-the-names-AND-average-salaries-of-all-departments-whose-average-salary-is-greater-than-42000', 0, 'S')"">dept_name</a>
+</th>
+<th><a href="javascript:sortTable('table-chapter-3,-slide-34:-Find-the-names-AND-average-salaries-of-all-departments-whose-average-salary-is-greater-than-42000', 1, 'S')"">avg_salary</a>
+</th>
+<tr><td style="text-align:left;">Biology</td>
+<td style="text-align:left;">72000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Comp. Sci.</td>
+<td style="text-align:left;">77333.333333</td>
+</tr>
+<tr><td style="text-align:left;">Elec. Eng.</td>
+<td style="text-align:left;">80000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Finance</td>
+<td style="text-align:left;">85000.000000</td>
+</tr>
+<tr><td style="text-align:left;">History</td>
+<td style="text-align:left;">61000.000000</td>
+</tr>
+<tr><td style="text-align:left;">Physics</td>
+<td style="text-align:left;">91000.000000</td>
+</tr>
+</table>
+<h3>Homework query #1: Retrieve all courses that have the letters a, e, i in THAT order in their names</h3>
+<table id="table-Homework-query-#1:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-THAT-order-in-their-names" style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#1:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-THAT-order-in-their-names', 0, 'S')"">course_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Homework-query-#1:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-THAT-order-in-their-names', 1, 'S')"">title</a>
+</th>
+<tr><td style="text-align:left;">CS-190</td>
+<td style="text-align:left;">Game Design</td>
+</tr>
+<tr><td style="text-align:left;">CS-319</td>
+<td style="text-align:left;">Image Processing</td>
+</tr>
+</table>
+<h3>Homework query #2: Retrieve all courses that have the letters a, e, i in ANY order in their names</h3>
+<table id="table-Homework-query-#2:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-ANY-order-in-their-names" style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#2:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-ANY-order-in-their-names', 0, 'S')"">course_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Homework-query-#2:-Retrieve-all-courses-that-have-the-letters-a,-e,-i-in-ANY-order-in-their-names', 1, 'S')"">title</a>
+</th>
+<tr><td style="text-align:left;">BIO-101</td>
+<td style="text-align:left;">Intro. to Biology</td>
+</tr>
+<tr><td style="text-align:left;">BIO-301</td>
+<td style="text-align:left;">Genetics</td>
+</tr>
+<tr><td style="text-align:left;">BIO-399</td>
+<td style="text-align:left;">Computational Biology</td>
+</tr>
+<tr><td style="text-align:left;">CS-101</td>
+<td style="text-align:left;">Intro. to Computer Science</td>
+</tr>
+<tr><td style="text-align:left;">CS-190</td>
+<td style="text-align:left;">Game Design</td>
+</tr>
+<tr><td style="text-align:left;">CS-315</td>
+<td style="text-align:left;">Robotics</td>
+</tr>
+<tr><td style="text-align:left;">CS-319</td>
+<td style="text-align:left;">Image Processing</td>
+</tr>
+<tr><td style="text-align:left;">CS-347</td>
+<td style="text-align:left;">Database System Concepts</td>
+</tr>
+<tr><td style="text-align:left;">EE-181</td>
+<td style="text-align:left;">Intro. to Digital Systems</td>
+</tr>
+<tr><td style="text-align:left;">FIN-201</td>
+<td style="text-align:left;">Investment Banking</td>
+</tr>
+<tr><td style="text-align:left;">HIS-351</td>
+<td style="text-align:left;">World History</td>
+</tr>
+<tr><td style="text-align:left;">MU-199</td>
+<td style="text-align:left;">Music Video Production</td>
+</tr>
+<tr><td style="text-align:left;">PHY-101</td>
+<td style="text-align:left;">Physical Principles</td>
+</tr>
+</table>
+<h3>Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed.</h3>
+<table id="table-Homework-query-#3:-Retrieve-the-names-of-all-students-who-failed-a-course-(grade-of-F)-along-with-the-name-of-the-course-that-they-failed." style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#3:-Retrieve-the-names-of-all-students-who-failed-a-course-(grade-of-F)-along-with-the-name-of-the-course-that-they-failed.', 0, 'S')"">name</a>
+</th>
+<th><a href="javascript:sortTable('table-Homework-query-#3:-Retrieve-the-names-of-all-students-who-failed-a-course-(grade-of-F)-along-with-the-name-of-the-course-that-they-failed.', 1, 'S')"">title</a>
+</th>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Intro. to Biology</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Genetics</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Computational Biology</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Intro. to Computer Science</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Game Design</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Robotics</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Image Processing</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Database System Concepts</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Intro. to Digital Systems</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Investment Banking</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">World History</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Music Video Production</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Physical Principles</td>
+</tr>
+</table>
+<h3>Homework query #4: Retrieve the percentage of solid A grades compared to all courses, AND rename that column "Percent_A"</h3>
+<table id="table-Homework-query-#4:-Retrieve-the-percentage-of-solid-A-grades-compared-to-all-courses,-AND-rename-that-column-"Percent_A"" style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#4:-Retrieve-the-percentage-of-solid-A-grades-compared-to-all-courses,-AND-rename-that-column-"Percent_A"', 0, 'S')"">Percent_A</a>
+</th>
+<tr><td style="text-align:left;">33.3333</td>
+</tr>
+</table>
+<h3>Homework query #5: Retrieve the names AND numbers of all courses that do not have prerequisites.</h3>
+<table id="table-Homework-query-#5:-Retrieve-the-names-AND-numbers-of-all-courses-that-do-not-have-prerequisites." style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#5:-Retrieve-the-names-AND-numbers-of-all-courses-that-do-not-have-prerequisites.', 0, 'S')"">title</a>
+</th>
+<th><a href="javascript:sortTable('table-Homework-query-#5:-Retrieve-the-names-AND-numbers-of-all-courses-that-do-not-have-prerequisites.', 1, 'S')"">course_id</a>
+</th>
+<tr><td style="text-align:left;">Intro. to Biology</td>
+<td style="text-align:left;">BIO-101</td>
+</tr>
+<tr><td style="text-align:left;">Intro. to Computer Science</td>
+<td style="text-align:left;">CS-101</td>
+</tr>
+<tr><td style="text-align:left;">Investment Banking</td>
+<td style="text-align:left;">FIN-201</td>
+</tr>
+<tr><td style="text-align:left;">World History</td>
+<td style="text-align:left;">HIS-351</td>
+</tr>
+<tr><td style="text-align:left;">Music Video Production</td>
+<td style="text-align:left;">MU-199</td>
+</tr>
+<tr><td style="text-align:left;">Physical Principles</td>
+<td style="text-align:left;">PHY-101</td>
+</tr>
+</table>
+<h3>Homework query #6: Retrieves the names of all students AND their advisors if they have one.</h3>
+<table id="table-Homework-query-#6:-Retrieves-the-names-of-all-students-AND-their-advisors-if-they-have-one." style="width:100%"><th><a href="javascript:sortTable('table-Homework-query-#6:-Retrieves-the-names-of-all-students-AND-their-advisors-if-they-have-one.', 0, 'S')"">student_name</a>
+</th>
+<th><a href="javascript:sortTable('table-Homework-query-#6:-Retrieves-the-names-of-all-students-AND-their-advisors-if-they-have-one.', 1, 'S')"">advisor_name</a>
+</th>
+<tr><td style="text-align:left;">Zhang</td>
+<td style="text-align:left;">Katz</td>
+</tr>
+<tr><td style="text-align:left;">Shankar</td>
+<td style="text-align:left;">Srinivasan</td>
+</tr>
+<tr><td style="text-align:left;">Brandt</td>
+<td style="text-align:left;">None</td>
+</tr>
+<tr><td style="text-align:left;">Chavez</td>
+<td style="text-align:left;">Singh</td>
+</tr>
+<tr><td style="text-align:left;">Peltier</td>
+<td style="text-align:left;">Einstein</td>
+</tr>
+<tr><td style="text-align:left;">Levy</td>
+<td style="text-align:left;">Einstein</td>
+</tr>
+<tr><td style="text-align:left;">Williams</td>
+<td style="text-align:left;">None</td>
+</tr>
+<tr><td style="text-align:left;">Sanchez</td>
+<td style="text-align:left;">None</td>
+</tr>
+<tr><td style="text-align:left;">Snow</td>
+<td style="text-align:left;">None</td>
+</tr>
+<tr><td style="text-align:left;">Brown</td>
+<td style="text-align:left;">Katz</td>
+</tr>
+<tr><td style="text-align:left;">Aoi</td>
+<td style="text-align:left;">Kim</td>
+</tr>
+<tr><td style="text-align:left;">Bourikas</td>
+<td style="text-align:left;">Kim</td>
+</tr>
+<tr><td style="text-align:left;">Tanaka</td>
+<td style="text-align:left;">Crick</td>
+</tr>
+</table>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 05, 2024 13:29 PM</h6>
+</center>
+</body>
+</html>
