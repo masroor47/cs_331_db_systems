@@ -1,0 +1,4461 @@
+<html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as06">
+<style>body {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    color: purple;
+    text-align: center;
+}
+h3 {
+    color: purple;
+}
+.vericaltext {
+ writing-mode: vertical-lr;
+ text-orientation: upright;
+}
+
+table, th, td {
+    border: 1px solid;
+    text-align: center;
+    vertical-align: top
+}
+th > a {
+    color: lavender;
+}
+th {
+    background-color: purple;
+    color: lavender;
+}
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+tr:nth-child(odd) {
+    background-color: #79d3db;
+}</style>
+<script>
+function sortTable(tableId, colNum, colType) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+  table = document.getElementById(tableId);
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[colNum];
+      y = rows[i + 1].getElementsByTagName("td")[colNum];
+      if (colType == 'N') { 
+        if (((dir == "asc") && (Number(x.innerHTML) > Number(y.innerHTML))) ||
+            ((dir == "desc") && (Number(x.innerHTML) < Number(y.innerHTML)))) {
+          shouldSwitch = true;
+          break;
+        }
+      } else {
+        if (((dir == "asc") && (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())) ||
+            ((dir == "desc") && (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()))) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchCount ++;
+    } else {
+     if (switchCount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</head>
+<body><h1>Analytics</h1>
+<h3>Table of Contents</h3>
+<ol><li><a href="#table-Select-everything-from-the-new-view-v_udb_table_columns">Select everything from the new view v_udb_table_columns</a>
+</li>
+<li><a href="#table-Aggregation:-retrieve-number-of-columns-per-table">Aggregation: retrieve number of columns per table</a>
+</li>
+<li><a href="#table-Summary-of-queries">Summary of queries</a>
+</li>
+<li><a href="#table-Retrieve-queries-for-Assignment-3">Retrieve queries for Assignment 3</a>
+</li>
+<li><a href="#table-Retrieve-queries-for-Assignment-4">Retrieve queries for Assignment 4</a>
+</li>
+<li><a href="#table-Retrieve-queries-for-Assignment-5">Retrieve queries for Assignment 5</a>
+</li>
+<li><a href="#table-Retrieve-queries-for-Assignment-6">Retrieve queries for Assignment 6</a>
+</li>
+</ol>
+<h3>Select everything from the new view v_udb_table_columns</h3>
+<table id="table-Select-everything-from-the-new-view-v_udb_table_columns" style="width:100%"><th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 0, 'S')"">TABLE_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 1, 'N')"">ORDINAL_POSITION</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 2, 'S')"">COLUMN_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 3, 'S')"">DATA_TYPE</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 4, 'N')"">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</a>
+</th>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 5, 'S')"">IS_NULLABLE</a>
+</th>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">s_ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">i_ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">room_number</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">capacity</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">title</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">50</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">credits</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">budget</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">points</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">graduate_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">graduate_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">30</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">salary</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">circle_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">total_points</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">circle_points</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">pi_estimate</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">point_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">circle_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">x</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">y</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">shape_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">shape_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">perimeter_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">area_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">shape_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">shape_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">area_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">volume_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">prereq_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">building</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">room_number</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">time_slot_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">dept_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">tot_cred</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">time_slot_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">day</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">start_hr</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">start_min</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">end_hr</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">end_min</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">student_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">GPA</td>
+<td style="text-align:left;">double</td>
+<td style="text-align:right;">22</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">points</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">TABLE_NAME</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">64</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">ORDINAL_POSITION</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">COLUMN_NAME</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">64</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">DATA_TYPE</td>
+<td style="text-align:left;">longtext</td>
+<td style="text-align:right;">4294967295</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">IS_NULLABLE</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">NO</td>
+</tr>
+</table>
+<h3>Aggregation: retrieve number of columns per table</h3>
+<table id="table-Aggregation:-retrieve-number-of-columns-per-table" style="width:100%"><th><a href="javascript:sortTable('table-Aggregation:-retrieve-number-of-columns-per-table', 0, 'S')"">TABLE_NAME</a>
+</th>
+<th><a href="javascript:sortTable('table-Aggregation:-retrieve-number-of-columns-per-table', 1, 'N')"">columns</a>
+</th>
+<tr><td style="text-align:left;">advisor</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">classroom</td>
+<td style="text-align:right;">3</td>
+</tr>
+<tr><td style="text-align:left;">course</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">department</td>
+<td style="text-align:right;">3</td>
+</tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">graduate</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">prereq</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">section</td>
+<td style="text-align:right;">7</td>
+</tr>
+<tr><td style="text-align:left;">student</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">takes</td>
+<td style="text-align:right;">6</td>
+</tr>
+<tr><td style="text-align:left;">teaches</td>
+<td style="text-align:right;">5</td>
+</tr>
+<tr><td style="text-align:left;">time_slot</td>
+<td style="text-align:right;">6</td>
+</tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">7</td>
+</tr>
+<tr><td style="text-align:left;">v_udb_table_columns</td>
+<td style="text-align:right;">6</td>
+</tr>
+</table>
+<h3>Summary of queries</h3>
+<table id="table-Summary-of-queries" style="width:100%"><th><a href="javascript:sortTable('table-Summary-of-queries', 0, 'S')"">assignment</a>
+</th>
+<th><a href="javascript:sortTable('table-Summary-of-queries', 1, 'N')"">COUNT(*)</a>
+</th>
+<th><a href="javascript:sortTable('table-Summary-of-queries', 2, 'N')"">Min_Dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Summary-of-queries', 3, 'N')"">Avg_Dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Summary-of-queries', 4, 'N')"">Max_Dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Summary-of-queries', 5, 'N')"">Total_Dur</a>
+</th>
+<tr><td style="text-align:left;">Analytics</td>
+<td style="text-align:right;">189</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:right;">0.00178571</td>
+<td style="text-align:right;">0.0188</td>
+<td style="text-align:right;">0.3375</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">70</td>
+<td style="text-align:right;">0.0000</td>
+<td style="text-align:right;">0.00121714</td>
+<td style="text-align:right;">0.0371</td>
+<td style="text-align:right;">0.0852</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">719</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:right;">0.00096245</td>
+<td style="text-align:right;">0.0153</td>
+<td style="text-align:right;">0.6920</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">430</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:right;">0.00076116</td>
+<td style="text-align:right;">0.0151</td>
+<td style="text-align:right;">0.3273</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:right;">0.00101304</td>
+<td style="text-align:right;">0.0082</td>
+<td style="text-align:right;">0.0233</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 7</td>
+<td style="text-align:right;">761</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:right;">0.00348160</td>
+<td style="text-align:right;">0.1403</td>
+<td style="text-align:right;">2.6495</td>
+</tr>
+</table>
+<h3>Retrieve queries for Assignment 3</h3>
+<table id="table-Retrieve-queries-for-Assignment-3" style="width:100%"><th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 0, 'N')"">query_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 1, 'S')"">query_text</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 2, 'S')"">query_desc</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 3, 'S')"">query_db</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 4, 'N')"">query_rows</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 5, 'S')"">query_user</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 6, 'S')"">query_assn</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 7, 'N')"">query_dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-3', 8, 'S')"">query_ended</a>
+</th>
+<tr><td style="text-align:right;">1</td>
+<td style="text-align:left;">CREATE TABLE IF NOT EXISTS graduate (graduate_id int, graduate_name varchar(30))</td>
+<td style="text-align:left;">creating graduate table</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0052</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">2</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">3</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">4</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">5</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">6</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">7</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">8</td>
+<td style="text-align:left;">SHOW DATABASES</td>
+<td style="text-align:left;">make udb default</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">9</td>
+<td style="text-align:left;">USE udb</td>
+<td style="text-align:left;">Make udb default</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">10</td>
+<td style="text-align:left;">SHOW TABLES</td>
+<td style="text-align:left;">make udb default</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">11</td>
+<td style="text-align:left;">select * from advisor</td>
+<td style="text-align:left;">retrieve all rows from advisor</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">12</td>
+<td style="text-align:left;">select * from classroom</td>
+<td style="text-align:left;">retrieve all rows from classroom</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">13</td>
+<td style="text-align:left;">select * from course</td>
+<td style="text-align:left;">retrieve all rows from course</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">14</td>
+<td style="text-align:left;">select * from department</td>
+<td style="text-align:left;">retrieve all rows from department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">15</td>
+<td style="text-align:left;">select * from graduate</td>
+<td style="text-align:left;">retrieve all rows from graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">16</td>
+<td style="text-align:left;">select * from instructor</td>
+<td style="text-align:left;">retrieve all rows from instructor</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">17</td>
+<td style="text-align:left;">select * from prereq</td>
+<td style="text-align:left;">retrieve all rows from prereq</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">18</td>
+<td style="text-align:left;">select * from section</td>
+<td style="text-align:left;">retrieve all rows from section</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">19</td>
+<td style="text-align:left;">select * from student</td>
+<td style="text-align:left;">retrieve all rows from student</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">20</td>
+<td style="text-align:left;">select * from takes</td>
+<td style="text-align:left;">retrieve all rows from takes</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">22</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">21</td>
+<td style="text-align:left;">select * from teaches</td>
+<td style="text-align:left;">retrieve all rows from teaches</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">22</td>
+<td style="text-align:left;">select * from time_slot</td>
+<td style="text-align:left;">retrieve all rows from time_slot</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">23</td>
+<td style="text-align:left;">select * from query</td>
+<td style="text-align:left;">logged queries</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">22</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-04 21:52:42</td>
+</tr>
+<tr><td style="text-align:right;">1402</td>
+<td style="text-align:left;">CREATE TABLE IF NOT EXISTS graduate (graduate_id int, graduate_name varchar(30))</td>
+<td style="text-align:left;">creating graduate table</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0062</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1403</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1404</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1405</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1406</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1407</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1408</td>
+<td style="text-align:left;">insert into graduate (graduate_id, graduate_name) values (%s, %s)</td>
+<td style="text-align:left;">inserting into graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1409</td>
+<td style="text-align:left;">SHOW DATABASES</td>
+<td style="text-align:left;">listing databases</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0028</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1410</td>
+<td style="text-align:left;">USE udb</td>
+<td style="text-align:left;">Make udb default</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0000</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1411</td>
+<td style="text-align:left;">SHOW TABLES</td>
+<td style="text-align:left;">listing tables in udb</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">17</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1412</td>
+<td style="text-align:left;">select * from advisor</td>
+<td style="text-align:left;">retrieve all rows from advisor</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0011</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1413</td>
+<td style="text-align:left;">select * from classroom</td>
+<td style="text-align:left;">retrieve all rows from classroom</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0019</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1414</td>
+<td style="text-align:left;">select * from course</td>
+<td style="text-align:left;">retrieve all rows from course</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0014</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1415</td>
+<td style="text-align:left;">select * from department</td>
+<td style="text-align:left;">retrieve all rows from department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0019</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1416</td>
+<td style="text-align:left;">select * from graduate</td>
+<td style="text-align:left;">retrieve all rows from graduate</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1417</td>
+<td style="text-align:left;">select * from instructor</td>
+<td style="text-align:left;">retrieve all rows from instructor</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1418</td>
+<td style="text-align:left;">select * from math_circle</td>
+<td style="text-align:left;">retrieve all rows from math_circle</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1419</td>
+<td style="text-align:left;">select * from math_point</td>
+<td style="text-align:left;">retrieve all rows from math_point</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">11103</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-09 13:01:25</td>
+</tr>
+<tr><td style="text-align:right;">1420</td>
+<td style="text-align:left;">select * from math_shape2d</td>
+<td style="text-align:left;">retrieve all rows from math_shape2d</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1421</td>
+<td style="text-align:left;">select * from math_shape3d</td>
+<td style="text-align:left;">retrieve all rows from math_shape3d</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0015</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1422</td>
+<td style="text-align:left;">select * from prereq</td>
+<td style="text-align:left;">retrieve all rows from prereq</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0014</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1423</td>
+<td style="text-align:left;">select * from section</td>
+<td style="text-align:left;">retrieve all rows from section</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1424</td>
+<td style="text-align:left;">select * from student</td>
+<td style="text-align:left;">retrieve all rows from student</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0013</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1425</td>
+<td style="text-align:left;">select * from takes</td>
+<td style="text-align:left;">retrieve all rows from takes</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">22</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0012</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1426</td>
+<td style="text-align:left;">select * from teaches</td>
+<td style="text-align:left;">retrieve all rows from teaches</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1427</td>
+<td style="text-align:left;">select * from time_slot</td>
+<td style="text-align:left;">retrieve all rows from time_slot</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1428</td>
+<td style="text-align:left;">select * from v_udb_table_columns</td>
+<td style="text-align:left;">retrieve all rows from v_udb_table_columns</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">70</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0011</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">1429</td>
+<td style="text-align:left;">select * from query</td>
+<td style="text-align:left;">logged queries</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">1428</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-09 13:01:26</td>
+</tr>
+<tr><td style="text-align:right;">2095</td>
+<td style="text-align:left;">SELECT * FROM advisor</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2096</td>
+<td style="text-align:left;">SELECT * FROM classroom</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2097</td>
+<td style="text-align:left;">SELECT * FROM course</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2098</td>
+<td style="text-align:left;">SELECT * FROM department</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2099</td>
+<td style="text-align:left;">SELECT * FROM grade_points</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2100</td>
+<td style="text-align:left;">SELECT * FROM graduate</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2101</td>
+<td style="text-align:left;">SELECT * FROM instructor</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2102</td>
+<td style="text-align:left;">SELECT * FROM math_circle</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2103</td>
+<td style="text-align:left;">SELECT * FROM math_point</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">11103</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0371</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2104</td>
+<td style="text-align:left;">SELECT * FROM math_shape2d</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2105</td>
+<td style="text-align:left;">SELECT * FROM math_shape3d</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2106</td>
+<td style="text-align:left;">SELECT * FROM prereq</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2107</td>
+<td style="text-align:left;">SELECT * FROM section</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2108</td>
+<td style="text-align:left;">SELECT * FROM student</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2109</td>
+<td style="text-align:left;">SELECT * FROM takes</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">22</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2110</td>
+<td style="text-align:left;">SELECT * FROM teaches</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2111</td>
+<td style="text-align:left;">SELECT * FROM time_slot</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">20</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2112</td>
+<td style="text-align:left;">SELECT * FROM v_takes_points</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">21</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+<tr><td style="text-align:right;">2113</td>
+<td style="text-align:left;">SELECT * FROM v_udb_table_columns</td>
+<td style="text-align:left;">Retrieve all rows from table</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">79</td>
+<td style="text-align:left;">Arun</td>
+<td style="text-align:left;">Assignment 3</td>
+<td style="text-align:right;">0.0011</td>
+<td style="text-align:left;">2024-01-09 16:13:44</td>
+</tr>
+</table>
+<h3>Retrieve queries for Assignment 4</h3>
+<table id="table-Retrieve-queries-for-Assignment-4" style="width:100%"><th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 0, 'N')"">query_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 1, 'S')"">query_text</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 2, 'S')"">query_desc</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 3, 'S')"">query_db</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 4, 'N')"">query_rows</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 5, 'S')"">query_user</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 6, 'S')"">query_assn</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 7, 'N')"">query_dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-4', 8, 'S')"">query_ended</a>
+</th>
+<tr><td style="text-align:right;">24</td>
+<td style="text-align:left;">select dept_name,
+        ( select count(*)
+          from instructor
+          where department.dept_name = instructor.dept_name)
+          as num_instructors
+from department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0153</td>
+<td style="text-align:left;">2024-01-05 11:12:08</td>
+</tr>
+<tr><td style="text-align:right;">25</td>
+<td style="text-align:left;">select dept_name,
+        ( select count(*)
+          from instructor
+          where department.dept_name = instructor.dept_name)
+          as num_instructors
+from department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0012</td>
+<td style="text-align:left;">2024-01-05 11:14:52</td>
+</tr>
+<tr><td style="text-align:right;">26</td>
+<td style="text-align:left;">select dept_name,
+        ( select count(*)
+          from instructor
+          where department.dept_name = instructor.dept_name)
+          as num_instructors
+from department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-05 11:15:10</td>
+</tr>
+<tr><td style="text-align:right;">27</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 3'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 3</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-05 11:15:10</td>
+</tr>
+<tr><td style="text-align:right;">28</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 4'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 4</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 11:15:10</td>
+</tr>
+<tr><td style="text-align:right;">29</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:19:20</td>
+</tr>
+<tr><td style="text-align:right;">30</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:20:33</td>
+</tr>
+<tr><td style="text-align:right;">31</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:20:33</td>
+</tr>
+<tr><td style="text-align:right;">32</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0026</td>
+<td style="text-align:left;">2024-01-05 13:20:33</td>
+</tr>
+<tr><td style="text-align:right;">33</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:20:33</td>
+</tr>
+<tr><td style="text-align:right;">34</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:20:33</td>
+</tr>
+<tr><td style="text-align:right;">35</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">36</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">37</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">38</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">39</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">40</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:21:38</td>
+</tr>
+<tr><td style="text-align:right;">41</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">42</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">43</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">44</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">45</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">46</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:22:23</td>
+</tr>
+<tr><td style="text-align:right;">47</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">48</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">49</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">50</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0022</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">51</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">52</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:22:32</td>
+</tr>
+<tr><td style="text-align:right;">53</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">54</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0026</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">55</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">56</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">57</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">58</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-05 13:24:04</td>
+</tr>
+<tr><td style="text-align:right;">59</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">60</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">61</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">62</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">63</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">64</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:27:03</td>
+</tr>
+<tr><td style="text-align:right;">65</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">66</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">67</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">68</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">69</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">70</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:27:36</td>
+</tr>
+<tr><td style="text-align:right;">71</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-05 13:28:50</td>
+</tr>
+<tr><td style="text-align:right;">72</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:28:50</td>
+</tr>
+<tr><td style="text-align:right;">73</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">74</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">75</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">76</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">77</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 31: Find the average salary of instructors in the Computer Science department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">78</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">79</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">chapter 3, slide 32: Find the average salary of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">80</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">chapter 3, slide 34: Find the names AND average salaries of all departments whose average salary is greater than 42000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">81</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">Homework query #1: Retrieve all courses that have the letters a, e, i in THAT order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">82</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">Homework query #2: Retrieve all courses that have the letters a, e, i in ANY order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">83</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">84</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">Homework query #4: Retrieve the percentage of solid A grades compared to all courses, AND rename that column "Percent_A"</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">85</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">Homework query #5: Retrieve the names AND numbers of all courses that do not have prerequisites.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">86</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">Homework query #6: Retrieves the names of all students AND their advisors if they have one.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">87</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 3'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 3</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">88</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 4'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 4</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">64</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-05 13:28:51</td>
+</tr>
+<tr><td style="text-align:right;">89</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">90</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">91</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">92</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">93</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">94</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">95</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 31: Find the average salary of instructors in the Computer Science department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">96</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">97</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">chapter 3, slide 32: Find the average salary of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">98</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">chapter 3, slide 34: Find the names AND average salaries of all departments whose average salary is greater than 42000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">99</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">Homework query #1: Retrieve all courses that have the letters a, e, i in THAT order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">100</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">Homework query #2: Retrieve all courses that have the letters a, e, i in ANY order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">101</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">102</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">Homework query #4: Retrieve the percentage of solid A grades compared to all courses, AND rename that column "Percent_A"</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">103</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">Homework query #5: Retrieve the names AND numbers of all courses that do not have prerequisites.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">104</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">Homework query #6: Retrieves the names of all students AND their advisors if they have one.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">105</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 3'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 3</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">106</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 4'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 4</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">82</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-05 13:29:29</td>
+</tr>
+<tr><td style="text-align:right;">483</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 3'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 3</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0046</td>
+<td style="text-align:left;">2024-01-08 10:27:25</td>
+</tr>
+<tr><td style="text-align:right;">484</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 4'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 4</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">84</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 10:27:25</td>
+</tr>
+<tr><td style="text-align:right;">522</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 3'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 3</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">23</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0014</td>
+<td style="text-align:left;">2024-01-08 10:36:16</td>
+</tr>
+<tr><td style="text-align:right;">523</td>
+<td style="text-align:left;">SELECT * FROM query WHERE query_assn = 'Assignment 4'</td>
+<td style="text-align:left;">retrieve all queries executed for Assignment 4</td>
+<td style="text-align:left;">meta</td>
+<td style="text-align:right;">86</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 10:36:16</td>
+</tr>
+<tr><td style="text-align:right;">524</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 17: List all Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">525</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">chapter 3, slide 17: List all the good Comp Sci instructors</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">526</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">527</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Art'</td>
+<td style="text-align:left;">chapter 3, slide 19: Find the names of all instructors in the Art department who have taught some course AND the course_id</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">528</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">chapter 3, slide 25: Find the names of all instructors with salary between $90,000 AND $100,000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">529</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">chapter 3, slide 26: Find courses that ran in Fall 2017 or in Spring 2018</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0037</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">530</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">chapter 3, slide 31: Find the average salary of instructors in the Computer Science department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">531</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">chapter 3, slide 52: List all departments along with the number of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">532</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">chapter 3, slide 32: Find the average salary of instructors in each department</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">533</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">chapter 3, slide 34: Find the names AND average salaries of all departments whose average salary is greater than 42000</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">534</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">Homework query #1: Retrieve all courses that have the letters a, e, i in THAT order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">535</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">Homework query #2: Retrieve all courses that have the letters a, e, i in ANY order in their names</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+<tr><td style="text-align:right;">536</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 4</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 10:41:50</td>
+</tr>
+</table>
+<h3>Retrieve queries for Assignment 5</h3>
+<table id="table-Retrieve-queries-for-Assignment-5" style="width:100%"><th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 0, 'N')"">query_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 1, 'S')"">query_text</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 2, 'S')"">query_desc</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 3, 'S')"">query_db</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 4, 'N')"">query_rows</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 5, 'S')"">query_user</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 6, 'S')"">query_assn</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 7, 'N')"">query_dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-5', 8, 'S')"">query_ended</a>
+</th>
+<tr><td style="text-align:right;">107</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0151</td>
+<td style="text-align:left;">2024-01-08 08:57:22</td>
+</tr>
+<tr><td style="text-align:right;">108</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 08:57:22</td>
+</tr>
+<tr><td style="text-align:right;">109</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-08 08:57:22</td>
+</tr>
+<tr><td style="text-align:right;">110</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 08:57:22</td>
+</tr>
+<tr><td style="text-align:right;">111</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 08:57:26</td>
+</tr>
+<tr><td style="text-align:right;">112</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:57:26</td>
+</tr>
+<tr><td style="text-align:right;">113</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:57:26</td>
+</tr>
+<tr><td style="text-align:right;">114</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:57:26</td>
+</tr>
+<tr><td style="text-align:right;">115</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:57:53</td>
+</tr>
+<tr><td style="text-align:right;">116</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:57:53</td>
+</tr>
+<tr><td style="text-align:right;">117</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0009</td>
+<td style="text-align:left;">2024-01-08 08:57:53</td>
+</tr>
+<tr><td style="text-align:right;">118</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 08:57:53</td>
+</tr>
+<tr><td style="text-align:right;">119</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-08 08:58:13</td>
+</tr>
+<tr><td style="text-align:right;">120</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 08:58:13</td>
+</tr>
+<tr><td style="text-align:right;">121</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:58:13</td>
+</tr>
+<tr><td style="text-align:right;">122</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 08:58:13</td>
+</tr>
+<tr><td style="text-align:right;">123</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 08:59:09</td>
+</tr>
+<tr><td style="text-align:right;">124</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 08:59:09</td>
+</tr>
+<tr><td style="text-align:right;">125</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 08:59:09</td>
+</tr>
+<tr><td style="text-align:right;">126</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor. dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 08:59:09</td>
+</tr>
+<tr><td style="text-align:right;">127</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:02:21</td>
+</tr>
+<tr><td style="text-align:right;">128</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:02:21</td>
+</tr>
+<tr><td style="text-align:right;">129</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:02:21</td>
+</tr>
+<tr><td style="text-align:right;">130</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Art'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:02:21</td>
+</tr>
+<tr><td style="text-align:right;">131</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">132</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">133</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">134</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Finance'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">135</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">136</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0020</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">137</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0012</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">138</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0025</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">139</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">140</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">141</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0012</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">142</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">143</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0014</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">144</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">145</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0013</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">146</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-08 09:06:24</td>
+</tr>
+<tr><td style="text-align:right;">147</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">148</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">149</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">150</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Finance'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">151</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">152</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">153</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">154</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">155</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">156</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">157</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">158</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">159</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">160</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">161</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">162</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:09:39</td>
+</tr>
+<tr><td style="text-align:right;">163</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">164</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">165</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">166</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Finance'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">167</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">168</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">169</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">170</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">171</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">172</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">173</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">174</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">175</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">176</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">177</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">178</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:09:55</td>
+</tr>
+<tr><td style="text-align:right;">179</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">180</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">181</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">182</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Finance'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">183</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">184</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">185</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">186</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">187</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">188</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">189</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">190</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">191</td>
+<td style="text-align:left;">SELECT 
+    student.name, course.title
+FROM 
+    student, takes, course
+WHERE 
+    student.id = takes.id AND takes.grade = 'F'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">192</td>
+<td style="text-align:left;">SELECT 
+    (num_solid_a / total_grades) * 100 AS Percent_A
+FROM
+    (SELECT 
+        count(CASE WHEN grade = 'A' THEN 1 END) AS num_solid_a,
+        count(grade) AS total_grades
+    FROM 
+        takes) AS subquery</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">193</td>
+<td style="text-align:left;">SELECT
+    course.title, course.course_id
+FROM 
+    course
+WHERE course.course_id not in 
+    (SELECT course_id
+    FROM prereq)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">194</td>
+<td style="text-align:left;">SELECT
+    s.name AS student_name,
+    i.name AS advisor_name
+FROM
+    student s
+LEFT JOIN
+    advisor a ON s.id = a.s_ID
+LEFT JOIN
+    instructor i ON a.i_ID = i.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-08 09:13:25</td>
+</tr>
+<tr><td style="text-align:right;">195</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">196</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE dept_name = 'Comp. Sci.' AND salary > 70000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">197</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">15</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">198</td>
+<td style="text-align:left;">SELECT name, course_id
+FROM instructor , teaches
+WHERE instructor.ID = teaches.ID  
+          AND  instructor.dept_name = 'Finance'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">199</td>
+<td style="text-align:left;">SELECT name
+FROM instructor
+WHERE salary between 90000 AND 100000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">200</td>
+<td style="text-align:left;">(SELECT course_id  FROM section WHERE semester = 'Fall' AND year = 2017)
+UNION
+(SELECT course_id  FROM section WHERE semester = 'Spring' AND year = 2018)</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">201</td>
+<td style="text-align:left;">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = 'Comp. Sci.'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">202</td>
+<td style="text-align:left;">SELECT dept_name,
+        ( SELECT count(*)
+          FROM instructor
+          WHERE department.dept_name = instructor.dept_name)
+          AS num_instructors
+FROM department</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">203</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0007</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">204</td>
+<td style="text-align:left;">SELECT dept_name, avg (salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg (salary) > 42000</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">205</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%e%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+<tr><td style="text-align:right;">206</td>
+<td style="text-align:left;">SELECT course_id, title
+FROM course
+WHERE title LIKE '%a%'
+    or title LIKE '%e%'
+    or title LIKE '%i%'</td>
+<td style="text-align:left;">[[...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...], [...]]</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 5</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-08 09:14:33</td>
+</tr>
+</table>
+<h3>Retrieve queries for Assignment 6</h3>
+<table id="table-Retrieve-queries-for-Assignment-6" style="width:100%"><th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 0, 'N')"">query_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 1, 'S')"">query_text</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 2, 'S')"">query_desc</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 3, 'S')"">query_db</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 4, 'N')"">query_rows</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 5, 'S')"">query_user</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 6, 'S')"">query_assn</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 7, 'N')"">query_dur</a>
+</th>
+<th><a href="javascript:sortTable('table-Retrieve-queries-for-Assignment-6', 8, 'S')"">query_ended</a>
+</th>
+<tr><td style="text-align:right;">2168</td>
+<td style="text-align:left;">DROP TABLE IF EXISTS grade_points</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0073</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2169</td>
+<td style="text-align:left;">CREATE TABLE grade_points(
+    grade           VARCHAR(2) NOT NULL PRIMARY KEY,
+    points          FLOAT,
+    
+    CONSTRAINT check_grade_in_range CHECK (points >= 0 and points <= 4)
+)</td>
+<td style="text-align:left;">Assignment 6, [4] Create a table grade_points (grade, points) that maps letter grades to number grades.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0082</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2170</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('A', 4.0)</td>
+<td style="text-align:left;">Assignment 6, filling up the grade_point map</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2171</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('A-', 3.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2172</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B+', 3.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2173</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B' , 3.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2174</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B-', 2.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2175</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C+', 2.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2176</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C' , 2.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2177</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C-', 1.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2178</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D+', 1.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2179</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D' , 1.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2180</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D-', 0.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2181</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('F+', 0.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2182</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('F' , 0.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2183</td>
+<td style="text-align:left;">SELECT * FROM grade_points</td>
+<td style="text-align:left;">Check out grade_points</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2184</td>
+<td style="text-align:left;">CREATE OR REPLACE VIEW v_takes_points AS
+SELECT takes.*, points
+FROM takes
+JOIN grade_points
+ON takes.grade = grade_points.grade</td>
+<td style="text-align:left;">Assignment 6, [5] Add a foreign key from the grade column in the existing takes table to the new grade_points table.
+ALTER TABLE takes
+ADD CONSTRAINT FOREIGN KEY(grade) REFERENCES grade_points(grade)
+
+Assignment 6, [6] Add a foreign key from the grade column in the existing takes table to the new grade_points table.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0022</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2185</td>
+<td style="text-align:left;">SELECT * FROM v_takes_points</td>
+<td style="text-align:left;">Assignment 6, checking out the v_takes_points view</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">21</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2186</td>
+<td style="text-align:left;">SELECT 
+    COALESCE(ID, 12345) as random_students_id, 
+    COALESCE(sum(course.credits * points), 0) as total_points
+FROM
+    takes
+RIGHT JOIN
+    course ON takes.course_id = course.course_id
+RIGHT JOIN 
+    grade_points ON takes.grade = grade_points.grade
+WHERE ID = 12345</td>
+<td style="text-align:left;">Assignment 6, [7] Compute the total number of grade points (credits * grade points) earned by student X 
+You will need to join takes, course, and the new grade_points tables. 
+If the student is in the system, but hasn't taken any courses, the student's total points is 0. 
+Random Student's ID: 12345</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2187</td>
+<td style="text-align:left;">SELECT
+    random_students_id,
+    (total_points / total_credits) as GPA
+FROM 
+    (
+        SELECT 
+            COALESCE(takes.ID, 12345) AS random_students_id, 
+            COALESCE(sum(course.credits * points), 0) AS total_points,
+            COALESCE(student.tot_cred, 0) AS total_credits
+        FROM
+            student
+        JOIN
+            takes ON student.ID = takes.ID
+        RIGHT JOIN
+            course ON takes.course_id = course.course_id
+        RIGHT JOIN 
+            grade_points ON takes.grade = grade_points.grade
+        WHERE student.ID = 12345
+    ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [8] Compute the GPA - i.e. total grade points / total credits - for the same student in the previous question.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2188</td>
+<td style="text-align:left;">SELECT
+    student_id,
+    COALESCE(ROUND(total_points / total_credits, 2), 0.0) as GPA
+FROM 
+    (
+        SELECT 
+	        IFNULL (takes.id, student.id) as student_id, 
+            COALESCE(sum(course.credits * points), 0) AS total_points,
+            COALESCE(student.tot_cred, 0) AS total_credits
+        FROM
+            student
+        LEFT JOIN
+            takes ON student.ID = takes.ID
+        LEFT JOIN
+            course ON takes.course_id = course.course_id
+        LEFT JOIN 
+            grade_points ON takes.grade = grade_points.grade
+        GROUP BY student.ID
+        ORDER BY student_id
+    ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [9] Find the GPA of all students, i.e. not just for one student at a time.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2189</td>
+<td style="text-align:left;">CREATE OR REPLACE VIEW v_student_gpa AS 
+    SELECT
+        student_id,
+        COALESCE(ROUND(total_points / total_credits, 2), 0.0) as GPA
+    FROM 
+        (
+            SELECT 
+                IFNULL (takes.id, student.id) as student_id, 
+                COALESCE(sum(course.credits * points), 0) AS total_points,
+                COALESCE(student.tot_cred, 0) AS total_credits
+            FROM
+                student
+            LEFT JOIN
+                takes ON student.ID = takes.ID
+            LEFT JOIN
+                course ON takes.course_id = course.course_id
+            LEFT JOIN 
+                grade_points ON takes.grade = grade_points.grade
+            GROUP BY student.ID
+            ORDER BY student_id
+        ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [10] Create a view v_student_gpa (id, gpa) that gives a dynamic version of the information in the previous question.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0011</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+<tr><td style="text-align:right;">2190</td>
+<td style="text-align:left;">SELECT * FROM v_student_gpa</td>
+<td style="text-align:left;">Calling the view that shows students and their GPAs</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-09 19:12:22</td>
+</tr>
+</table>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 09, 2024 19:12 PM</h6>
+</center>
+</body>
+</html>

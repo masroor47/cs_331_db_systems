@@ -1,0 +1,450 @@
+<html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as06">
+<style>body {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    color: purple;
+    text-align: center;
+}
+h3 {
+    color: purple;
+}
+.vericaltext {
+ writing-mode: vertical-lr;
+ text-orientation: upright;
+}
+
+table, th, td {
+    border: 1px solid;
+    text-align: center;
+    vertical-align: top
+}
+th > a {
+    color: lavender;
+}
+th {
+    background-color: purple;
+    color: lavender;
+}
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+tr:nth-child(odd) {
+    background-color: #79d3db;
+}</style>
+<script>
+function sortTable(tableId, colNum, colType) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+  table = document.getElementById(tableId);
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[colNum];
+      y = rows[i + 1].getElementsByTagName("td")[colNum];
+      if (colType == 'N') { 
+        if (((dir == "asc") && (Number(x.innerHTML) > Number(y.innerHTML))) ||
+            ((dir == "desc") && (Number(x.innerHTML) < Number(y.innerHTML)))) {
+          shouldSwitch = true;
+          break;
+        }
+      } else {
+        if (((dir == "asc") && (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())) ||
+            ((dir == "desc") && (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()))) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchCount ++;
+    } else {
+     if (switchCount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</head>
+<body><h1>Assignment 4</h1>
+<h3>Table of Contents</h3>
+<ol><li><a href="#table-Check-out-grade_points">Check out grade_points</a>
+</li>
+<li><a href="#table-Assignment-6,-checking-out-the-v_takes_points-view">Assignment 6, checking out the v_takes_points view</a>
+</li>
+<li><a href="#table-Assignment-6,-[7]-Compute-the-total-number-of-grade-points-(credits-*-grade-points)-earned-by-student-X-
+You-will-need-to-join-takes,-course,-and-the-new-grade_points-tables.-
+If-the-student-is-in-the-system,-but-hasn't-taken-any-courses,-the-student's-total-points-is-0.-
+Random-Student's-ID:-12345">Assignment 6, [7] Compute the total number of grade points (credits * grade points) earned by student X 
+You will need to join takes, course, and the new grade_points tables. 
+If the student is in the system, but hasn't taken any courses, the student's total points is 0. 
+Random Student's ID: 12345</a>
+</li>
+<li><a href="#table-Assignment-6-[8]-Compute-the-GPA---i.e.-total-grade-points-/-total-credits---for-the-same-student-in-the-previous-question.">Assignment 6 [8] Compute the GPA - i.e. total grade points / total credits - for the same student in the previous question.</a>
+</li>
+<li><a href="#table-Assignment-6-[9]-Find-the-GPA-of-all-students,-i.e.-not-just-for-one-student-at-a-time.">Assignment 6 [9] Find the GPA of all students, i.e. not just for one student at a time.</a>
+</li>
+<li><a href="#table-Calling-the-view-that-shows-students-and-their-GPAs">Calling the view that shows students and their GPAs</a>
+</li>
+</ol>
+<h3>Check out grade_points</h3>
+<table id="table-Check-out-grade_points" style="width:100%"><th><a href="javascript:sortTable('table-Check-out-grade_points', 0, 'S')"">grade</a>
+</th>
+<th><a href="javascript:sortTable('table-Check-out-grade_points', 1, 'N')"">points</a>
+</th>
+<tr><td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:left;">A-</td>
+<td style="text-align:right;">3.7</td>
+</tr>
+<tr><td style="text-align:left;">B</td>
+<td style="text-align:right;">3.0</td>
+</tr>
+<tr><td style="text-align:left;">B-</td>
+<td style="text-align:right;">2.7</td>
+</tr>
+<tr><td style="text-align:left;">B+</td>
+<td style="text-align:right;">3.3</td>
+</tr>
+<tr><td style="text-align:left;">C</td>
+<td style="text-align:right;">2.0</td>
+</tr>
+<tr><td style="text-align:left;">C-</td>
+<td style="text-align:right;">1.7</td>
+</tr>
+<tr><td style="text-align:left;">C+</td>
+<td style="text-align:right;">2.3</td>
+</tr>
+<tr><td style="text-align:left;">D</td>
+<td style="text-align:right;">1.0</td>
+</tr>
+<tr><td style="text-align:left;">D-</td>
+<td style="text-align:right;">0.7</td>
+</tr>
+<tr><td style="text-align:left;">D+</td>
+<td style="text-align:right;">1.3</td>
+</tr>
+<tr><td style="text-align:left;">F</td>
+<td style="text-align:right;">0.0</td>
+</tr>
+<tr><td style="text-align:left;">F+</td>
+<td style="text-align:right;">0.3</td>
+</tr>
+</table>
+<h3>Assignment 6, checking out the v_takes_points view</h3>
+<table id="table-Assignment-6,-checking-out-the-v_takes_points-view" style="width:100%"><th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 0, 'N')"">ID</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 1, 'S')"">course_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 2, 'N')"">sec_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 3, 'S')"">semester</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 4, 'N')"">year</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 5, 'S')"">grade</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-checking-out-the-v_takes_points-view', 6, 'N')"">points</a>
+</th>
+<tr><td style="text-align:right;">00128</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">00128</td>
+<td style="text-align:left;">CS-347</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A-</td>
+<td style="text-align:right;">3.7</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">C</td>
+<td style="text-align:right;">2.0</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:left;">CS-190</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:left;">CS-315</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:left;">CS-347</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">19991</td>
+<td style="text-align:left;">HIS-351</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">B</td>
+<td style="text-align:right;">3.0</td>
+</tr>
+<tr><td style="text-align:right;">23121</td>
+<td style="text-align:left;">FIN-201</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">C+</td>
+<td style="text-align:right;">2.3</td>
+</tr>
+<tr><td style="text-align:right;">44553</td>
+<td style="text-align:left;">PHY-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">B-</td>
+<td style="text-align:right;">2.7</td>
+</tr>
+<tr><td style="text-align:right;">45678</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">F</td>
+<td style="text-align:right;">0.0</td>
+</tr>
+<tr><td style="text-align:right;">45678</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">B+</td>
+<td style="text-align:right;">3.3</td>
+</tr>
+<tr><td style="text-align:right;">45678</td>
+<td style="text-align:left;">CS-319</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">B</td>
+<td style="text-align:right;">3.0</td>
+</tr>
+<tr><td style="text-align:right;">54321</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A-</td>
+<td style="text-align:right;">3.7</td>
+</tr>
+<tr><td style="text-align:right;">54321</td>
+<td style="text-align:left;">CS-190</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">B+</td>
+<td style="text-align:right;">3.3</td>
+</tr>
+<tr><td style="text-align:right;">55739</td>
+<td style="text-align:left;">MU-199</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">A-</td>
+<td style="text-align:right;">3.7</td>
+</tr>
+<tr><td style="text-align:right;">76543</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">76543</td>
+<td style="text-align:left;">CS-319</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+<tr><td style="text-align:right;">76653</td>
+<td style="text-align:left;">EE-181</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">C</td>
+<td style="text-align:right;">2.0</td>
+</tr>
+<tr><td style="text-align:right;">98765</td>
+<td style="text-align:left;">CS-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Fall</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">C-</td>
+<td style="text-align:right;">1.7</td>
+</tr>
+<tr><td style="text-align:right;">98765</td>
+<td style="text-align:left;">CS-315</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Spring</td>
+<td style="text-align:right;">2018</td>
+<td style="text-align:left;">B</td>
+<td style="text-align:right;">3.0</td>
+</tr>
+<tr><td style="text-align:right;">98988</td>
+<td style="text-align:left;">BIO-101</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">Summer</td>
+<td style="text-align:right;">2017</td>
+<td style="text-align:left;">A</td>
+<td style="text-align:right;">4.0</td>
+</tr>
+</table>
+<h3>Assignment 6, [7] Compute the total number of grade points (credits * grade points) earned by student X 
+You will need to join takes, course, and the new grade_points tables. 
+If the student is in the system, but hasn't taken any courses, the student's total points is 0. 
+Random Student's ID: 12345</h3>
+<table id="table-Assignment-6,-[7]-Compute-the-total-number-of-grade-points-(credits-*-grade-points)-earned-by-student-X-
+You-will-need-to-join-takes,-course,-and-the-new-grade_points-tables.-
+If-the-student-is-in-the-system,-but-hasn't-taken-any-courses,-the-student's-total-points-is-0.-
+Random-Student's-ID:-12345" style="width:100%"><th><a href="javascript:sortTable('table-Assignment-6,-[7]-Compute-the-total-number-of-grade-points-(credits-*-grade-points)-earned-by-student-X-
+You-will-need-to-join-takes,-course,-and-the-new-grade_points-tables.-
+If-the-student-is-in-the-system,-but-hasn't-taken-any-courses,-the-student's-total-points-is-0.-
+Random-Student's-ID:-12345', 0, 'N')"">random_students_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6,-[7]-Compute-the-total-number-of-grade-points-(credits-*-grade-points)-earned-by-student-X-
+You-will-need-to-join-takes,-course,-and-the-new-grade_points-tables.-
+If-the-student-is-in-the-system,-but-hasn't-taken-any-courses,-the-student's-total-points-is-0.-
+Random-Student's-ID:-12345', 1, 'N')"">total_points</a>
+</th>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:right;">48.0</td>
+</tr>
+</table>
+<h3>Assignment 6 [8] Compute the GPA - i.e. total grade points / total credits - for the same student in the previous question.</h3>
+<table id="table-Assignment-6-[8]-Compute-the-GPA---i.e.-total-grade-points-/-total-credits---for-the-same-student-in-the-previous-question." style="width:100%"><th><a href="javascript:sortTable('table-Assignment-6-[8]-Compute-the-GPA---i.e.-total-grade-points-/-total-credits---for-the-same-student-in-the-previous-question.', 0, 'N')"">random_students_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6-[8]-Compute-the-GPA---i.e.-total-grade-points-/-total-credits---for-the-same-student-in-the-previous-question.', 1, 'N')"">GPA</a>
+</th>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:right;">1.5</td>
+</tr>
+</table>
+<h3>Assignment 6 [9] Find the GPA of all students, i.e. not just for one student at a time.</h3>
+<table id="table-Assignment-6-[9]-Find-the-GPA-of-all-students,-i.e.-not-just-for-one-student-at-a-time." style="width:100%"><th><a href="javascript:sortTable('table-Assignment-6-[9]-Find-the-GPA-of-all-students,-i.e.-not-just-for-one-student-at-a-time.', 0, 'N')"">student_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Assignment-6-[9]-Find-the-GPA-of-all-students,-i.e.-not-just-for-one-student-at-a-time.', 1, 'N')"">GPA</a>
+</th>
+<tr><td style="text-align:right;">00128</td>
+<td style="text-align:right;">0.27</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:right;">1.5</td>
+</tr>
+<tr><td style="text-align:right;">19991</td>
+<td style="text-align:right;">0.11</td>
+</tr>
+<tr><td style="text-align:right;">23121</td>
+<td style="text-align:right;">0.06</td>
+</tr>
+<tr><td style="text-align:right;">44553</td>
+<td style="text-align:right;">0.19</td>
+</tr>
+<tr><td style="text-align:right;">45678</td>
+<td style="text-align:right;">0.48</td>
+</tr>
+<tr><td style="text-align:right;">54321</td>
+<td style="text-align:right;">0.52</td>
+</tr>
+<tr><td style="text-align:right;">55739</td>
+<td style="text-align:right;">0.29</td>
+</tr>
+<tr><td style="text-align:right;">70557</td>
+<td style="text-align:right;">0.0</td>
+</tr>
+<tr><td style="text-align:right;">76543</td>
+<td style="text-align:right;">0.48</td>
+</tr>
+<tr><td style="text-align:right;">76653</td>
+<td style="text-align:right;">0.1</td>
+</tr>
+<tr><td style="text-align:right;">98765</td>
+<td style="text-align:right;">0.16</td>
+</tr>
+<tr><td style="text-align:right;">98988</td>
+<td style="text-align:right;">0.13</td>
+</tr>
+</table>
+<h3>Calling the view that shows students and their GPAs</h3>
+<table id="table-Calling-the-view-that-shows-students-and-their-GPAs" style="width:100%"><th><a href="javascript:sortTable('table-Calling-the-view-that-shows-students-and-their-GPAs', 0, 'N')"">student_id</a>
+</th>
+<th><a href="javascript:sortTable('table-Calling-the-view-that-shows-students-and-their-GPAs', 1, 'N')"">GPA</a>
+</th>
+<tr><td style="text-align:right;">00128</td>
+<td style="text-align:right;">0.27</td>
+</tr>
+<tr><td style="text-align:right;">12345</td>
+<td style="text-align:right;">1.5</td>
+</tr>
+<tr><td style="text-align:right;">19991</td>
+<td style="text-align:right;">0.11</td>
+</tr>
+<tr><td style="text-align:right;">23121</td>
+<td style="text-align:right;">0.06</td>
+</tr>
+<tr><td style="text-align:right;">44553</td>
+<td style="text-align:right;">0.19</td>
+</tr>
+<tr><td style="text-align:right;">45678</td>
+<td style="text-align:right;">0.48</td>
+</tr>
+<tr><td style="text-align:right;">54321</td>
+<td style="text-align:right;">0.52</td>
+</tr>
+<tr><td style="text-align:right;">55739</td>
+<td style="text-align:right;">0.29</td>
+</tr>
+<tr><td style="text-align:right;">70557</td>
+<td style="text-align:right;">0.0</td>
+</tr>
+<tr><td style="text-align:right;">76543</td>
+<td style="text-align:right;">0.48</td>
+</tr>
+<tr><td style="text-align:right;">76653</td>
+<td style="text-align:right;">0.1</td>
+</tr>
+<tr><td style="text-align:right;">98765</td>
+<td style="text-align:right;">0.16</td>
+</tr>
+<tr><td style="text-align:right;">98988</td>
+<td style="text-align:right;">0.13</td>
+</tr>
+</table>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 09, 2024 19:08 PM</h6>
+</center>
+</body>
+</html>
