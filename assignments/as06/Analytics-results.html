@@ -752,11 +752,11 @@ function sortTable(tableId, colNum, colType) {
 <th><a href="javascript:sortTable('table-Summary-of-queries', 5, 'N')"">Total_Dur</a>
 </th>
 <tr><td style="text-align:left;">Analytics</td>
-<td style="text-align:right;">189</td>
+<td style="text-align:right;">196</td>
 <td style="text-align:right;">0.0006</td>
-<td style="text-align:right;">0.00178571</td>
+<td style="text-align:right;">0.00178316</td>
 <td style="text-align:right;">0.0188</td>
-<td style="text-align:right;">0.3375</td>
+<td style="text-align:right;">0.3495</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 3</td>
 <td style="text-align:right;">70</td>
@@ -780,11 +780,11 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:right;">0.3273</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 6</td>
-<td style="text-align:right;">23</td>
+<td style="text-align:right;">47</td>
 <td style="text-align:right;">0.0001</td>
-<td style="text-align:right;">0.00101304</td>
-<td style="text-align:right;">0.0082</td>
-<td style="text-align:right;">0.0233</td>
+<td style="text-align:right;">0.00123191</td>
+<td style="text-align:right;">0.0128</td>
+<td style="text-align:right;">0.0579</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 7</td>
 <td style="text-align:right;">761</td>
@@ -4454,8 +4454,327 @@ FROM
 <td style="text-align:right;">0.0005</td>
 <td style="text-align:left;">2024-01-09 19:12:22</td>
 </tr>
+<tr><td style="text-align:right;">2198</td>
+<td style="text-align:left;">DROP TABLE IF EXISTS grade_points</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0067</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2199</td>
+<td style="text-align:left;">CREATE TABLE grade_points(
+    grade           VARCHAR(2) NOT NULL PRIMARY KEY,
+    points          FLOAT,
+    
+    CONSTRAINT check_grade_in_range CHECK (points >= 0 and points <= 4)
+)</td>
+<td style="text-align:left;">Assignment 6, [4] Create a table grade_points (grade, points) that maps letter grades to number grades.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0128</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2200</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('A', 4.0)</td>
+<td style="text-align:left;">Assignment 6, filling up the grade_point map</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2201</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('A-', 3.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2202</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B+', 3.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2203</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B' , 3.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2204</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('B-', 2.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2205</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C+', 2.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2206</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C' , 2.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2207</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('C-', 1.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2208</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D+', 1.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2209</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D' , 1.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2210</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('D-', 0.7)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2211</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('F+', 0.3)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2212</td>
+<td style="text-align:left;">INSERT INTO grade_points VALUES('F' , 0.0)</td>
+<td style="text-align:left;">Query from: 'Assignment6.sql'</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2213</td>
+<td style="text-align:left;">SELECT * FROM grade_points</td>
+<td style="text-align:left;">Check out grade_points</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0001</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2214</td>
+<td style="text-align:left;">ALTER TABLE takes
+ADD CONSTRAINT FOREIGN KEY(grade) REFERENCES grade_points(grade)</td>
+<td style="text-align:left;">Assignment 6, [5] Add a foreign key from the grade column in the existing takes table to the new grade_points table.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0095</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2215</td>
+<td style="text-align:left;">CREATE OR REPLACE VIEW v_takes_points AS
+SELECT takes.*, points
+FROM takes
+JOIN grade_points
+ON takes.grade = grade_points.grade</td>
+<td style="text-align:left;">Assignment 6, [6] Add a foreign key from the grade column in the existing takes table to the new grade_points table.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2216</td>
+<td style="text-align:left;">SELECT * FROM v_takes_points</td>
+<td style="text-align:left;">Assignment 6, checking out the v_takes_points view</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">21</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0003</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2217</td>
+<td style="text-align:left;">SELECT 
+    COALESCE(ID, 12345) as random_students_id, 
+    COALESCE(sum(course.credits * points), 0) as total_points
+FROM
+    takes
+RIGHT JOIN
+    course ON takes.course_id = course.course_id
+RIGHT JOIN 
+    grade_points ON takes.grade = grade_points.grade
+WHERE ID = 12345</td>
+<td style="text-align:left;">Assignment 6, [7] Compute the total number of grade points (credits * grade points) earned by student X 
+You will need to join takes, course, and the new grade_points tables. 
+If the student is in the system, but hasn't taken any courses, the student's total points is 0. 
+Random Student's ID: 12345</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2218</td>
+<td style="text-align:left;">SELECT
+    random_students_id,
+    (total_points / total_credits) as GPA
+FROM 
+    (
+        SELECT 
+            COALESCE(takes.ID, 12345) AS random_students_id, 
+            COALESCE(sum(course.credits * points), 0) AS total_points,
+            COALESCE(student.tot_cred, 0) AS total_credits
+        FROM
+            student
+        JOIN
+            takes ON student.ID = takes.ID
+        RIGHT JOIN
+            course ON takes.course_id = course.course_id
+        RIGHT JOIN 
+            grade_points ON takes.grade = grade_points.grade
+        WHERE student.ID = 12345
+    ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [8] Compute the GPA - i.e. total grade points / total credits - for the same student in the previous question.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2219</td>
+<td style="text-align:left;">SELECT
+    student_id,
+    COALESCE(ROUND(total_points / total_credits, 2), 0.0) as GPA
+FROM 
+    (
+        SELECT 
+	        IFNULL (takes.id, student.id) as student_id, 
+            COALESCE(sum(course.credits * points), 0) AS total_points,
+            COALESCE(student.tot_cred, 0) AS total_credits
+        FROM
+            student
+        LEFT JOIN
+            takes ON student.ID = takes.ID
+        LEFT JOIN
+            course ON takes.course_id = course.course_id
+        LEFT JOIN 
+            grade_points ON takes.grade = grade_points.grade
+        GROUP BY student.ID
+        ORDER BY student_id
+    ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [9] Find the GPA of all students, i.e. not just for one student at a time.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2220</td>
+<td style="text-align:left;">CREATE OR REPLACE VIEW v_student_gpa AS 
+    SELECT
+        student_id,
+        COALESCE(ROUND(total_points / total_credits, 2), 0.0) as GPA
+    FROM 
+        (
+            SELECT 
+                IFNULL (takes.id, student.id) as student_id, 
+                COALESCE(sum(course.credits * points), 0) AS total_points,
+                COALESCE(student.tot_cred, 0) AS total_credits
+            FROM
+                student
+            LEFT JOIN
+                takes ON student.ID = takes.ID
+            LEFT JOIN
+                course ON takes.course_id = course.course_id
+            LEFT JOIN 
+                grade_points ON takes.grade = grade_points.grade
+            GROUP BY student.ID
+            ORDER BY student_id
+        ) AS pts</td>
+<td style="text-align:left;">Assignment 6 [10] Create a view v_student_gpa (id, gpa) that gives a dynamic version of the information in the previous question.</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">0</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0010</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
+<tr><td style="text-align:right;">2221</td>
+<td style="text-align:left;">SELECT * FROM v_student_gpa</td>
+<td style="text-align:left;">Calling the view that shows students and their GPAs</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 6</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-09 21:04:51</td>
+</tr>
 </table>
-<center><h6>&copy;2024 by Developer • Generated on Jan. 09, 2024 19:12 PM</h6>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 09, 2024 21:04 PM</h6>
 </center>
 </body>
 </html>

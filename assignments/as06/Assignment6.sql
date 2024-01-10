@@ -29,11 +29,11 @@ INSERT INTO grade_points VALUES('F' , 0.0);
 /* Check out grade_points*/
 SELECT * FROM grade_points;
 
-/* Assignment 6, [5] Add a foreign key from the grade column in the existing takes table to the new grade_points table.
+/* Assignment 6, [5] Add a foreign key from the grade column in the existing takes table to the new grade_points table. */
 ALTER TABLE takes
-ADD CONSTRAINT FOREIGN KEY(grade) REFERENCES grade_points(grade)
+ADD CONSTRAINT FOREIGN KEY(grade) REFERENCES grade_points(grade);
 
-Assignment 6, [6] Add a foreign key from the grade column in the existing takes table to the new grade_points table. */
+/* Assignment 6, [6] Add a foreign key from the grade column in the existing takes table to the new grade_points table. */
 CREATE OR REPLACE VIEW v_takes_points AS
 SELECT takes.*, points
 FROM takes
