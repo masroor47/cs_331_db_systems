@@ -43,6 +43,9 @@ def read_queries(file_name):
                 comment = f"Query from: '{file_name}'"
                 sql = query
             sql = sql.strip()
+            if "CREATE FUNCTION" in sql.upper() or "CREATE PROCEDURE" in sql.upper():
+                sql = sql.replace("##", ";")
+                print(f"REPLACED ## {sql}")
             comments.append(comment)
             sqls.append(sql)
     return comments, sqls
@@ -75,7 +78,7 @@ def process_queries(comments, queries, db, assignment, add_stats=False):
         table = [comment, headers, types, alignments, data]
         tables.append(table)
     output_file = assignment.replace(" ", "") + "-results.html"
-    ou.write_html_file_new(output_file, "TBA", tables, True, None, True)
+    ou.write_html_file_new(output_file, assignment, tables, True, None, True)
             
 
 def retrieve_query_log(assignments, db):
