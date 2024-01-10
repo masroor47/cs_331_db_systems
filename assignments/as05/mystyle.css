@@ -27,8 +27,8 @@ th {
     color: lavender;
 }
 tr:nth-child(even) {
-    background-color: lavender;
+    background-color: lightblue;
 }
 tr:nth-child(odd) {
-    background-color: plum;
+    background-color: #79d3db;
 }
