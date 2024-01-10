@@ -30,6 +30,7 @@ def log_query(query_text,
             conn=None):
     
     query_text = query_text.replace("'", "\\'")
+    query_desc = query_desc.replace("'", "\\'").replace("\\\\", "\\")
     query = f"""
     INSERT into query 
     (query_text, query_desc, query_db, query_rows, query_user, query_assn, query_dur) 
@@ -47,6 +48,15 @@ def log_query(query_text,
     if new_conn:
         conn.close()
 
+def call_procedure(query_text, cursor):
+    proc_query = query_text[4:].strip()
+    idx1 = proc_query.index('(')
+    idx2 = proc_query.index(')')
+    arg = int(proc_query[idx1+1 : idx2])
+    proc = proc_query[:idx1]
+    print(f"PROC QUERY {proc}")
+    cursor.callproc(proc, (arg, ))
+
 
 def run_query(query_text, 
             query_desc, 
@@ -56,12 +66,15 @@ def run_query(query_text,
     
     query_src = assignment
     conn = create_connection(query_db)
-    start = time.time()
     cursor = conn.cursor()
-    if query_execute_values is None:
-        cursor.execute(query_text) 
+    start = time.time()
+    if query_text.upper().startswith("CALL"):
+        call_procedure(query_text, cursor)
     else:
-        cursor.execute(query_text, query_execute_values)
+        if query_execute_values is None:
+            cursor.execute(query_text) 
+        else:
+            cursor.execute(query_text, query_execute_values)
     end = time.time()
     duration = end - start
     rows = cursor.fetchall()
@@ -96,7 +109,7 @@ def print_table(title, headers, data, alignments=None):
 
 def list_db_data(conn, query, desc):
     cur = conn.cursor()
-    run_query(query, "make udb default", "udb", assignment)
+    run_query(query, desc, "udb", assignment)
     cur.execute(query)
     results = [row[0] for row in cur]
     print(desc + ":\n", results)
@@ -104,18 +117,13 @@ def list_db_data(conn, query, desc):
 
 
 def preliminary(conn):
-   
     cursor = conn.cursor()
-
     databases = list_db_data(conn, "SHOW DATABASES", "listing databases") 
     print()
-
     cursor.execute("USE udb")
     run_query("USE udb", "Make udb default", "udb", assignment)
-
     tables = list_db_data(conn, "SHOW TABLES", "listing tables in udb")
     print()
-
     conn.close()
     return tables
 
