@@ -54,7 +54,6 @@ def call_procedure(query_text, cursor):
     idx2 = proc_query.index(')')
     arg = int(proc_query[idx1+1 : idx2])
     proc = proc_query[:idx1]
-    print(f"PROC QUERY {proc}")
     cursor.callproc(proc, (arg, ))
 
 
@@ -83,10 +82,9 @@ def run_query(query_text,
     conn.close()
     query_upper = query_text.upper()
     if query_upper.startswith("SELECT") or \
-        query_upper.startswith("(SELECT") or \
-        query_upper.startswith("SHOW") or \
-        query_upper.startswith("DESC"):
-        
+                query_upper.startswith("(SELECT") or \
+                query_upper.startswith("SHOW") or \
+                query_upper.startswith("DESC"):
         headers = [desc[0] for desc in cursor.description]
         if len(rows) == 0:
             data = [[None for _ in headers]]
