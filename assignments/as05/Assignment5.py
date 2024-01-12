@@ -4,15 +4,12 @@
 # Assignment 5 Tables, Views, and Meta-Data
 # Masroor Khonkhodzhaev
 
-
-import os
 import sys
-
-from dotenv import load_dotenv
-
 sys.path.append("..")
+sys.path.append("../..")
+
 import as03.Assignment3 as as3
-import OutputUtil as ou
+from assignments import OutputUtil as ou
 
 
 def is_float(s):
@@ -56,8 +53,6 @@ def process_queries(comments, queries, db, assignment, add_stats=False):
     for i in range(len(queries)):
         query = queries[i]
         comment = comments[i]
-        print(query)
-        print()
         headers, data = as3.run_query(query, comment, db, assignment)
         if len(headers) == 0: continue
         numeric = [all( [is_number(data[i][j]) for i in range(len(data))] ) for j in range(len(data[0]))]

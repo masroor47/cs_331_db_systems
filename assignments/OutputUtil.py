@@ -33,6 +33,7 @@ TAG_SPAN = 'span'
 TAG_STYLE = 'style'
 TAG_SCRIPT = 'script'
 TAG_META = 'meta'
+TAG_TITLE = 'title'
 
 sort_script = """
 function sortTable(tableId, colNum, colType) {
@@ -167,7 +168,8 @@ def write_html_file_new(file_name, my_title, my_tables, open_file=False, style_s
     script = create_element(TAG_SCRIPT, sort_script)
     meta_desc_attributes = f'name="description" content="OutputUtil developed by LT. Executed by {os.getcwd()}"'
     meta = create_element(TAG_META, "",  meta_desc_attributes, False)
-    head = create_element(TAG_HEAD, meta + style + script)
+    meta_title = create_element(TAG_TITLE, my_title)
+    head = create_element(TAG_HEAD, meta + meta_title + style + script)
     tables = ""
     toc_items = []
     for table in my_tables:

@@ -8,8 +8,6 @@ import sys
 sys.path.append("..")
 
 import as05.Assignment5 as as5
-import OutputUtil as ou
-
 
 def main():
     comments, queries = as5.read_queries("Assignment6.sql")

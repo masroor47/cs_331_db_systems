@@ -4,15 +4,12 @@
 # Assignment 4 Query runner, tracker, visualizer
 # Masroor Khonkhodzhaev
 
-
-import os
 import sys
 sys.path.append("..")
-
-from dotenv import load_dotenv
+sys.path.append("../..")
 
 import as03.Assignment3 as as3
-import OutputUtil as ou
+from assignments import OutputUtil as ou
 
 
 def process_queries(file_name, db, assignment):
