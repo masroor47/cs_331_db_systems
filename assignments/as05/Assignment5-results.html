@@ -1,4 +1,5 @@
 <html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as05">
+<title>Assignment 5</title>
 <style>body {
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -28,10 +29,10 @@ th {
     color: lavender;
 }
 tr:nth-child(even) {
-    background-color: lavender;
+    background-color: lightblue;
 }
 tr:nth-child(odd) {
-    background-color: plum;
+    background-color: #79d3db;
 }</style>
 <script>
 function sortTable(tableId, colNum, colType) {
@@ -74,7 +75,7 @@ function sortTable(tableId, colNum, colType) {
 }
 </script>
 </head>
-<body><h1>TBA</h1>
+<body><h1>Assignment 5</h1>
 <h3>Table of Contents</h3>
 <ol><li><a href="#table-Select-everything-from-the-new-view-v_udb_table_columns">Select everything from the new view v_udb_table_columns</a>
 </li>
@@ -90,7 +91,7 @@ function sortTable(tableId, colNum, colType) {
 </th>
 <th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 3, 'S')"">DATA_TYPE</a>
 </th>
-<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 4, 'N')"">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</a>
+<th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 4, 'S')"">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</a>
 </th>
 <th><a href="javascript:sortTable('table-Select-everything-from-the-new-view-v_udb_table_columns', 5, 'S')"">IS_NULLABLE</a>
 </th>
@@ -98,378 +99,700 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">s_ID</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">5</td>
+<td style="text-align:left;">5</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">advisor</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">i_ID</td>
 <td style="text-align:left;">varchar</td>
+<td style="text-align:left;">5</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">backup_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">relation</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">num_rows</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">num_cols</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
 <td style="text-align:right;">5</td>
+<td style="text-align:left;">csv_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">xml_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">json_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">csv_data</td>
+<td style="text-align:left;">longtext</td>
+<td style="text-align:left;">4294967295</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">xml_data</td>
+<td style="text-align:left;">longtext</td>
+<td style="text-align:left;">4294967295</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">json_data</td>
+<td style="text-align:left;">json</td>
+<td style="text-align:left;">None</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">11</td>
+<td style="text-align:left;">dtm</td>
+<td style="text-align:left;">datetime</td>
+<td style="text-align:left;">None</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">classroom</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">building</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">15</td>
+<td style="text-align:left;">15</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">classroom</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">room_number</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">7</td>
+<td style="text-align:left;">7</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">classroom</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">capacity</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">course</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">course_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">course</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">title</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">50</td>
+<td style="text-align:left;">50</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">course</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">dept_name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">course</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">credits</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">2</td>
+<td style="text-align:left;">2</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">department</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">dept_name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">department</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">building</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">15</td>
+<td style="text-align:left;">15</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">department</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">budget</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">12</td>
+<td style="text-align:left;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">2</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">points</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:left;">12</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">graduate</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">graduate_id</td>
 <td style="text-align:left;">int</td>
-<td style="text-align:right;">10</td>
+<td style="text-align:left;">10</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">graduate</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">graduate_name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">30</td>
+<td style="text-align:left;">30</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">instructor</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">ID</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">5</td>
+<td style="text-align:left;">5</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">instructor</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">instructor</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">dept_name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">instructor</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">salary</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">circle_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">total_points</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">circle_points</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">pi_estimate</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:left;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">point_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">circle_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">x</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:left;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">y</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:left;">12</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">shape_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">shape_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">perimeter_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">area_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">shape_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">shape_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">area_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">volume_formula</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">prereq</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">course_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">prereq</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">prereq_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">course_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">sec_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">semester</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">6</td>
+<td style="text-align:left;">6</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">year</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">5</td>
 <td style="text-align:left;">building</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">15</td>
+<td style="text-align:left;">15</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">6</td>
 <td style="text-align:left;">room_number</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">7</td>
+<td style="text-align:left;">7</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">section</td>
 <td style="text-align:right;">7</td>
 <td style="text-align:left;">time_slot_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">student</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">ID</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">5</td>
+<td style="text-align:left;">5</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">student</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">student</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">dept_name</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">student</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">tot_cred</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">3</td>
+<td style="text-align:left;">3</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">ID</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">5</td>
+<td style="text-align:left;">5</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">course_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">sec_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">semester</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">6</td>
+<td style="text-align:left;">6</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">5</td>
 <td style="text-align:left;">year</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">takes</td>
 <td style="text-align:right;">6</td>
 <td style="text-align:left;">grade</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">2</td>
+<td style="text-align:left;">2</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">teaches</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">ID</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">5</td>
+<td style="text-align:left;">5</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">teaches</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">course_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">teaches</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">sec_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">8</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">teaches</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">semester</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">6</td>
+<td style="text-align:left;">6</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">teaches</td>
 <td style="text-align:right;">5</td>
 <td style="text-align:left;">year</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">time_slot_id</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">4</td>
+<td style="text-align:left;">4</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">day</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">1</td>
+<td style="text-align:left;">1</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">start_hr</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">2</td>
+<td style="text-align:left;">2</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">start_min</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">2</td>
+<td style="text-align:left;">2</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">5</td>
 <td style="text-align:left;">end_hr</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">2</td>
+<td style="text-align:left;">2</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">6</td>
 <td style="text-align:left;">end_min</td>
 <td style="text-align:left;">decimal</td>
+<td style="text-align:left;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">student_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
 <td style="text-align:right;">2</td>
+<td style="text-align:left;">GPA</td>
+<td style="text-align:left;">double</td>
+<td style="text-align:left;">22</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">backup_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">table_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">25</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">num_rows</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">columns</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">csv_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">xml_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">json_length</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">date_or_something</td>
+<td style="text-align:left;">datetime</td>
+<td style="text-align:left;">None</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">ID</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">5</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">course_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">sec_id</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">semester</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">6</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">year</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:left;">4</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">grade</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">2</td>
+<td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">points</td>
+<td style="text-align:left;">float</td>
+<td style="text-align:left;">12</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">1</td>
 <td style="text-align:left;">TABLE_NAME</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">64</td>
+<td style="text-align:left;">64</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">2</td>
 <td style="text-align:left;">ORDINAL_POSITION</td>
 <td style="text-align:left;">int</td>
-<td style="text-align:right;">10</td>
+<td style="text-align:left;">10</td>
 <td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">3</td>
 <td style="text-align:left;">COLUMN_NAME</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">64</td>
+<td style="text-align:left;">64</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">4</td>
 <td style="text-align:left;">DATA_TYPE</td>
 <td style="text-align:left;">longtext</td>
-<td style="text-align:right;">4294967295</td>
+<td style="text-align:left;">4294967295</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">5</td>
 <td style="text-align:left;">coalesce(CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION)</td>
 <td style="text-align:left;">decimal</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">20</td>
 <td style="text-align:left;">YES</td>
 </tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">6</td>
 <td style="text-align:left;">IS_NULLABLE</td>
 <td style="text-align:left;">varchar</td>
-<td style="text-align:right;">3</td>
+<td style="text-align:left;">3</td>
 <td style="text-align:left;">NO</td>
 </tr>
 </table>
@@ -481,6 +804,9 @@ function sortTable(tableId, colNum, colType) {
 <tr><td style="text-align:left;">advisor</td>
 <td style="text-align:right;">2</td>
 </tr>
+<tr><td style="text-align:left;">backup</td>
+<td style="text-align:right;">11</td>
+</tr>
 <tr><td style="text-align:left;">classroom</td>
 <td style="text-align:right;">3</td>
 </tr>
@@ -490,10 +816,25 @@ function sortTable(tableId, colNum, colType) {
 <tr><td style="text-align:left;">department</td>
 <td style="text-align:right;">3</td>
 </tr>
+<tr><td style="text-align:left;">grade_points</td>
+<td style="text-align:right;">2</td>
+</tr>
 <tr><td style="text-align:left;">graduate</td>
 <td style="text-align:right;">2</td>
 </tr>
 <tr><td style="text-align:left;">instructor</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_circle</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_point</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_shape2d</td>
+<td style="text-align:right;">4</td>
+</tr>
+<tr><td style="text-align:left;">math_shape3d</td>
 <td style="text-align:right;">4</td>
 </tr>
 <tr><td style="text-align:left;">prereq</td>
@@ -514,11 +855,20 @@ function sortTable(tableId, colNum, colType) {
 <tr><td style="text-align:left;">time_slot</td>
 <td style="text-align:right;">6</td>
 </tr>
+<tr><td style="text-align:left;">v_student_gpa</td>
+<td style="text-align:right;">2</td>
+</tr>
+<tr><td style="text-align:left;">v_table_backups</td>
+<td style="text-align:right;">8</td>
+</tr>
+<tr><td style="text-align:left;">v_takes_points</td>
+<td style="text-align:right;">7</td>
+</tr>
 <tr><td style="text-align:left;">v_udb_table_columns</td>
 <td style="text-align:right;">6</td>
 </tr>
 </table>
-<center><h6>&copy;2024 by Developer • Generated on Jan. 08, 2024 10:51 AM</h6>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 11, 2024 22:50 PM</h6>
 </center>
 </body>
 </html>
