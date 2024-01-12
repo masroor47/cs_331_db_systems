@@ -72,8 +72,8 @@ WHERE title LIKE '%a%e%i%';
 SELECT course_id, title
 FROM course
 WHERE title LIKE '%a%'
-    or title LIKE '%e%'
-    or title LIKE '%i%';
+    AND title LIKE '%e%'
+    AND title LIKE '%i%';
 
 /* Homework query #3: Retrieve the names of all students who failed a course (grade of F) along with the name of the course that they failed. */
 SELECT 
@@ -81,7 +81,9 @@ SELECT
 FROM 
     student, takes, course
 WHERE 
-    student.id = takes.id AND takes.grade = 'F';
+    student.id = takes.id
+    AND takes.course_id = course.course_id 
+    AND takes.grade = 'F';
 
 /* Homework query #4: Retrieve the percentage of solid A grades compared to all courses, AND rename that column "Percent_A" */
 SELECT 
