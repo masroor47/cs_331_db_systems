@@ -3,6 +3,11 @@ SELECT *
 FROM v_udb_table_columns
 ORDER BY table_name;
 
+/* Aggregation: retrieve number of columns per table */
+select table_name, count(column_name) as columns
+from v_udb_table_columns
+group by table_name;
+
 /* Summary of queries */
 SELECT query_assn as assignment, COUNT(*), MIN(query_dur) AS Min_Dur, AVG(query_dur) AS Avg_Dur, MAX(query_dur) AS Max_Dur, SUM(query_dur) AS Total_Dur
 FROM query

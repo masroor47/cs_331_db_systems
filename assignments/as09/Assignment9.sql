@@ -54,6 +54,35 @@ INSERT INTO product_sales (product_name, store_location, num_sales) VALUES
 ('Desk', 'West', 63),
 ('Couch', 'North', 28);
 
-/* Retrieve data from product_sales */
+/* [3] Write a query to retrieve all rows from the product_sales table. */
 SELECT * FROM product_sales;
 
+/* [4] Write a query to retrieve all product names from the product_sales table. */
+SELECT product_name FROM product_sales;
+
+/* [5] Write a query to retrieve all product names and sum from the product_sales table. */
+SELECT product_name, SUM(num_sales) 
+FROM product_sales 
+GROUP BY product_name;
+
+/* [6] Write a query to keep track of all sales in location "north" as a separate column */
+SELECT 
+    product_name, 
+    SUM(CASE WHEN store_location = 'North' THEN num_sales ELSE 0 END) AS north 
+FROM product_sales;
+
+/* [7] Modify the query to include a group by clause on the product_name */
+SELECT 
+    product_name, 
+    SUM(CASE WHEN store_location = 'North' THEN num_sales ELSE 0 END) AS north 
+FROM product_sales
+GROUP BY product_name;
+
+/* [8] Modify the query to cover all four locations */
+SELECT product_name,
+SUM(CASE WHEN store_location = 'North' THEN num_sales ELSE 0 END) AS north,
+SUM(CASE WHEN store_location = 'Central' THEN num_sales ELSE 0 END) AS central,
+SUM(CASE WHEN store_location = 'South' THEN num_sales ELSE 0 END) AS south,
+SUM(CASE WHEN store_location = 'West' THEN num_sales ELSE 0 END) AS west
+FROM product_sales
+GROUP BY product_name;
