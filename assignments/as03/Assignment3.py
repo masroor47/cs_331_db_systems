@@ -61,12 +61,14 @@ def run_query(query_text,
             query_desc, 
             query_db, 
             assignment,
-            query_execute_values=None):
+            query_execute_values=None,
+            debug=False):
     
     query_src = assignment
     conn = create_connection(query_db)
     cursor = conn.cursor()
     start = time.time()
+    if debug: print(query_text)
     if query_text.upper().startswith("CALL"):
         call_procedure(query_text, cursor)
     else:
