@@ -1,5 +1,5 @@
 <html><head><meta name="description" content="OutputUtil developed by LT. Executed by /Users/masroor/Developer/school/cs_331_db_sys/assignments/as09">
-<title>Analytics-Assignment 8</title>
+<title>Analytics-Assignment 9</title>
 <style>body {
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -75,7 +75,7 @@ function sortTable(tableId, colNum, colType) {
 }
 </script>
 </head>
-<body><h1>Analytics-Assignment 8</h1>
+<body><h1>Analytics-Assignment 9</h1>
 <h3>Table of Contents</h3>
 <ol><li><a href="#table-Select-everything-from-the-new-view-v_udb_table_columns">Select everything from the new view v_udb_table_columns</a>
 </li>
@@ -124,6 +124,195 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:left;">varchar</td>
 <td style="text-align:left;">5</td>
 <td style="text-align:left;">YES</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">isbn</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">title</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">author</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">author_nationality</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">format</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">price</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:left;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">subject</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">pages</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">thickness</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">publisher</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">11</td>
+<td style="text-align:left;">publisher_country</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">genre_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">13</td>
+<td style="text-align:left;">genre_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">isbn</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">title</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">author</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">author_nationality</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">5</td>
+<td style="text-align:left;">format</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">6</td>
+<td style="text-align:left;">price</td>
+<td style="text-align:left;">decimal</td>
+<td style="text-align:left;">8</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">pages</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">8</td>
+<td style="text-align:left;">thickness</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">9</td>
+<td style="text-align:left;">publisher</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">10</td>
+<td style="text-align:left;">publisher_country</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">11</td>
+<td style="text-align:left;">genre_id</td>
+<td style="text-align:left;">int</td>
+<td style="text-align:left;">10</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">genre_name</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_subject_1nf</td>
+<td style="text-align:right;">1</td>
+<td style="text-align:left;">isbn</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
+</tr>
+<tr><td style="text-align:left;">as10_subject_1nf</td>
+<td style="text-align:right;">2</td>
+<td style="text-align:left;">subject</td>
+<td style="text-align:left;">varchar</td>
+<td style="text-align:left;">100</td>
+<td style="text-align:left;">NO</td>
 </tr>
 <tr><td style="text-align:left;">backup</td>
 <td style="text-align:right;">1</td>
@@ -841,6 +1030,15 @@ function sortTable(tableId, colNum, colType) {
 <tr><td style="text-align:left;">advisor</td>
 <td style="text-align:right;">2</td>
 </tr>
+<tr><td style="text-align:left;">as10_book_0nf</td>
+<td style="text-align:right;">13</td>
+</tr>
+<tr><td style="text-align:left;">as10_book_1nf</td>
+<td style="text-align:right;">12</td>
+</tr>
+<tr><td style="text-align:left;">as10_subject_1nf</td>
+<td style="text-align:right;">2</td>
+</tr>
 <tr><td style="text-align:left;">backup</td>
 <td style="text-align:right;">11</td>
 </tr>
@@ -929,18 +1127,18 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:right;">0.6400</td>
 </tr>
 <tr><td style="text-align:left;">Analytics-Assignment 8</td>
-<td style="text-align:right;">31</td>
+<td style="text-align:right;">59</td>
 <td style="text-align:right;">0.0005</td>
-<td style="text-align:right;">0.00434516</td>
+<td style="text-align:right;">0.00505593</td>
 <td style="text-align:right;">0.0263</td>
-<td style="text-align:right;">0.1347</td>
+<td style="text-align:right;">0.2983</td>
 </tr>
 <tr><td style="text-align:left;">Analytics-Assignment 9</td>
-<td style="text-align:right;">9</td>
-<td style="text-align:right;">0.0021</td>
-<td style="text-align:right;">0.00488889</td>
+<td style="text-align:right;">11</td>
+<td style="text-align:right;">0.0013</td>
+<td style="text-align:right;">0.00433636</td>
 <td style="text-align:right;">0.0083</td>
-<td style="text-align:right;">0.0440</td>
+<td style="text-align:right;">0.0477</td>
 </tr>
 <tr><td style="text-align:left;">AnalyticsAssignment 8</td>
 <td style="text-align:right;">76</td>
@@ -948,6 +1146,13 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:right;">0.00389211</td>
 <td style="text-align:right;">0.0182</td>
 <td style="text-align:right;">0.2958</td>
+</tr>
+<tr><td style="text-align:left;">Assignment 10</td>
+<td style="text-align:right;">76</td>
+<td style="text-align:right;">0.0002</td>
+<td style="text-align:right;">0.00321053</td>
+<td style="text-align:right;">0.0135</td>
+<td style="text-align:right;">0.2440</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 3</td>
 <td style="text-align:right;">70</td>
@@ -985,18 +1190,18 @@ function sortTable(tableId, colNum, colType) {
 <td style="text-align:right;">3.0106</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 8</td>
-<td style="text-align:right;">1761</td>
+<td style="text-align:right;">1769</td>
 <td style="text-align:right;">0.0001</td>
-<td style="text-align:right;">0.00115679</td>
+<td style="text-align:right;">0.00115562</td>
 <td style="text-align:right;">0.0218</td>
-<td style="text-align:right;">2.0371</td>
+<td style="text-align:right;">2.0443</td>
 </tr>
 <tr><td style="text-align:left;">Assignment 9</td>
-<td style="text-align:right;">90</td>
+<td style="text-align:right;">94</td>
 <td style="text-align:right;">0.0002</td>
-<td style="text-align:right;">0.00261556</td>
+<td style="text-align:right;">0.00252872</td>
 <td style="text-align:right;">0.0125</td>
-<td style="text-align:right;">0.2354</td>
+<td style="text-align:right;">0.2377</td>
 </tr>
 </table>
 <h3>Retrieve queries for Assignment 3</h3>
@@ -9880,8 +10085,56 @@ GROUP BY product_name</td>
 <td style="text-align:right;">0.0004</td>
 <td style="text-align:left;">2024-01-13 22:29:49</td>
 </tr>
+<tr><td style="text-align:right;">4653</td>
+<td style="text-align:left;">SELECT DISTINCT product_name from product_sales</td>
+<td style="text-align:left;">Get all distinct values of product_name from table for pivot table</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">3</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 9</td>
+<td style="text-align:right;">0.0008</td>
+<td style="text-align:left;">2024-01-14 22:19:23</td>
+</tr>
+<tr><td style="text-align:right;">4654</td>
+<td style="text-align:left;">SELECT store_location, SUM(CASE WHEN product_name = 'Chair' THEN num_sales ELSE 0 END) AS Chair,
+SUM(CASE WHEN product_name = 'Desk' THEN num_sales ELSE 0 END) AS Desk,
+SUM(CASE WHEN product_name = 'Couch' THEN num_sales ELSE 0 END) AS Couch FROM product_sales GROUP BY store_location</td>
+<td style="text-align:left;">Build a pivot table product_sales for product_name, store_location</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">4</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 9</td>
+<td style="text-align:right;">0.0004</td>
+<td style="text-align:left;">2024-01-14 22:19:23</td>
+</tr>
+<tr><td style="text-align:right;">4655</td>
+<td style="text-align:left;">SELECT DISTINCT dept_name from instructor</td>
+<td style="text-align:left;">Get all distinct values of dept_name from table for pivot table</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">7</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 9</td>
+<td style="text-align:right;">0.0005</td>
+<td style="text-align:left;">2024-01-14 22:19:23</td>
+</tr>
+<tr><td style="text-align:right;">4656</td>
+<td style="text-align:left;">SELECT name, SUM(CASE WHEN dept_name = 'Biology' THEN salary ELSE 0 END) AS Biology,
+SUM(CASE WHEN dept_name = 'Comp. Sci.' THEN salary ELSE 0 END) AS Comp_Sci_,
+SUM(CASE WHEN dept_name = 'Elec. Eng.' THEN salary ELSE 0 END) AS Elec_Eng_,
+SUM(CASE WHEN dept_name = 'Finance' THEN salary ELSE 0 END) AS Finance,
+SUM(CASE WHEN dept_name = 'History' THEN salary ELSE 0 END) AS History,
+SUM(CASE WHEN dept_name = 'Music' THEN salary ELSE 0 END) AS Music,
+SUM(CASE WHEN dept_name = 'Physics' THEN salary ELSE 0 END) AS Physics FROM instructor GROUP BY name</td>
+<td style="text-align:left;">Build a pivot table instructor for dept_name, name</td>
+<td style="text-align:left;">udb</td>
+<td style="text-align:right;">12</td>
+<td style="text-align:left;">masroor</td>
+<td style="text-align:left;">Assignment 9</td>
+<td style="text-align:right;">0.0006</td>
+<td style="text-align:left;">2024-01-14 22:19:23</td>
+</tr>
 </table>
-<center><h6>&copy;2024 by Developer • Generated on Jan. 14, 2024 01:36 AM</h6>
+<center><h6>&copy;2024 by Developer • Generated on Jan. 14, 2024 22:19 PM</h6>
 </center>
 </body>
 </html>

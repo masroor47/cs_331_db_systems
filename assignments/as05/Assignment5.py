@@ -48,12 +48,12 @@ def read_queries(file_name):
     return comments, sqls
 
 
-def process_queries(comments, queries, db, assignment, add_stats=False):
+def process_queries(comments, queries, db, assignment, add_stats=False, debug=False):
     tables = []
     for i in range(len(queries)):
         query = queries[i]
         comment = comments[i]
-        headers, data = as3.run_query(query, comment, db, assignment)
+        headers, data = as3.run_query(query, comment, db, assignment, debug=debug)
         if len(headers) == 0: continue
         numeric = [all( [is_number(data[i][j]) for i in range(len(data))] ) for j in range(len(data[0]))]
         alignments = ["r" if numeric[j] else "l" for j in range(len(numeric))]

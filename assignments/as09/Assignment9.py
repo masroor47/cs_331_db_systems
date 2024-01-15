@@ -26,7 +26,10 @@ def pivot_table(table, col_x, col_y, col_val):
     headers, data = as3.run_query(query, desc, "udb", assn)
 
     query2 = f"SELECT {col_y}, " 
-    query2 += ",\n".join(f"SUM(CASE WHEN {col_x} = '{row[0]}' THEN {col_val} ELSE 0 END) AS {row[0]}" for row in data)
+    query2 += ",\n".join(
+        f"SUM(CASE WHEN {col_x} = '{row[0]}' THEN {col_val} ELSE 0 END) AS {row[0].replace('.', '_').replace(' ', '')}" 
+        for row in data
+    )
     query2 +=  f" FROM {table} GROUP BY {col_y}"
     
     desc2 = f"Build a pivot table {table} for {col_x}, {col_y}"
@@ -39,7 +42,7 @@ def pivot_table(table, col_x, col_y, col_val):
     return table
 
 
-assn = "Assignment 8"
+assn = "Assignment 9"
 db = "udb"
 def main():
     # comments, queries = as5.read_queries("Assignment9.sql")
@@ -47,6 +50,7 @@ def main():
 
     examples = [
         ('product_sales', 'product_name', 'store_location', 'num_sales'),
+        ('instructor', 'dept_name', 'name', 'salary'),
     ]
 
     html_tables = []
