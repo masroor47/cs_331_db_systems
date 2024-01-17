@@ -23,6 +23,14 @@ def is_float(s):
 def is_number(x):
 	return isinstance(x, int) or isinstance(x, float) or (isinstance(x, str) and is_float(x))
 
+# [1] Define a function get_ruler(length) that will create a "ruler" 
+# (i.e. numeric column headings) used to measure the positions and total space
+def get_ruler_for_html(length, for_html=False):
+    ruler1 = "".join([str(10*i).rjust(10, ' ') for i in range(1, 2+int(length/10))])
+    ruler1 = ruler1.replace(' ', '&nbsp;')
+    ruler2 = "0123456789" * (1+ int(length/10))
+    return ruler1 + "<br>" + ruler2
+
 
 def read_queries(file_name):
     with open(file_name, 'r') as file:
@@ -48,28 +56,36 @@ def read_queries(file_name):
     return comments, sqls
 
 
-def process_queries(comments, queries, db, assignment, add_stats=False, debug=False):
+def process_queries(
+            comments, 
+            queries, 
+            db, 
+            assignment, 
+            add_stats=False, 
+            debug=False,
+            format=""):
     tables = []
-    for i in range(len(queries)):
-        query = queries[i]
-        comment = comments[i]
-        headers, data = as3.run_query(query, comment, db, assignment, debug=debug)
+    for query, comment in zip(queries, comments):
+        if format in ['F', 'V']:
+            headers, data, cursor_desc = as3.run_query(query, comment, db, assignment, debug=debug, get_cursor_desc=True)
+            print(cursor_desc)
+
+            headers.append(("Fixed" if format == 'F' else "Variable") + '-Length Format')
+            col_widths = [desc[3] for desc in cursor_desc]
+            for row in data:
+                if format == 'F':
+                    record = "".join([str(row[i]).ljust(col_wid, ' ') for i, col_wid in enumerate(col_widths)])
+                    record = record.replace(' ', '&nbsp;')
+                else:
+                    record = "|".join([str(row[i]) for i in range(len(col_widths))])
+                ruler = "<tt>"  + get_ruler_for_html(sum(col_widths)) + '<br>' + record + "</tt>"
+                row.append(ruler)
+        else:
+            headers, data = as3.run_query(query, comment, db, assignment, debug=debug)
         if len(headers) == 0: continue
         numeric = [all( [is_number(data[i][j]) for i in range(len(data))] ) for j in range(len(data[0]))]
         alignments = ["r" if numeric[j] else "l" for j in range(len(numeric))]
         types = ["N" if n else "S" for n in numeric]
-        # print(numeric)
-        # for j in range(len(numeric)):
-        #     for r in range(len(data)):
-        #         if numeric[j] == False: continue
-        #         print(j, r)
-        #         data[r][j] = float(data[r][j])
-
-        # if add_stats:
-        #     stat_cols = [j for j in range(len(numeric)) if numeric[j]]
-        #     print(f"{query}\n{stat_cols}\n{data}\n")
-        #     ou.add_stats(data, stat_cols, 0, 3, True)
-
         table = [comment, headers, types, alignments, data]
         tables.append(table)
     output_file = assignment.replace(" ", "") + "-results.html"
