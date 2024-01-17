@@ -7,11 +7,13 @@ import time
 import os
 import texttable
 from dotenv import load_dotenv
-import mysql.connector
+# import mysql.connector
+import pymysql
 
 
 def create_connection(db):
-    conn = mysql.connector.connect(
+    # conn = mysql.connector.connect(
+    conn = pymysql.connect(
         host="localhost",
         user=user,
         passwd=password,
@@ -57,12 +59,14 @@ def call_procedure(query_text, cursor):
     cursor.callproc(proc, (arg, ))
 
 
-def run_query(query_text, 
-            query_desc, 
-            query_db, 
-            assignment,
-            query_execute_values=None,
-            debug=False):
+def run_query(
+        query_text, 
+        query_desc, 
+        query_db, 
+        assignment,
+        query_execute_values=None,
+        debug=False,
+        get_cursor_desc=False):
     
     query_src = assignment
     conn = create_connection(query_db)
@@ -82,19 +86,22 @@ def run_query(query_text,
     conn.commit()
     log_query(query_text, query_desc, query_db, len(rows), "masroor", query_src, duration)
     conn.close()
-    query_upper = query_text.upper()
-    if query_upper.startswith("SELECT") or \
-                query_upper.startswith("(SELECT") or \
-                query_upper.startswith("SHOW") or \
-                query_upper.startswith("DESC"):
-        headers = [desc[0] for desc in cursor.description]
-        if len(rows) == 0:
-            data = [[None for _ in headers]]
-        else:
-            data = [[str(col) for col in row] for row in rows]
-        return headers, data
-    else:
+
+    first_word = query_text.upper().split(None, 1)[0]
+    keywords = {'SELECT', '(SELECT', 'SHOW', 'DESC'}
+    if first_word not in keywords:
         return [], []
+    
+    headers = [desc[0] for desc in cursor.description]
+    if len(rows) == 0:
+        data = [[None for _ in headers]]
+    else:
+        data = [[str(col) for col in row] for row in rows]
+
+    if get_cursor_desc:
+        return headers, data, cursor.description
+    else:
+        return headers, data
 
 
 def print_table(title, headers, data, alignments=None):
